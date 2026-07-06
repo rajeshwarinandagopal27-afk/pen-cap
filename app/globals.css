@@ -1,0 +1,408 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ==========================================================================
+   PenCap Institute of Excellence — Design Tokens
+   Source of truth: /docs/design/02-design-tokens.md, 03-typography.md,
+   04-color-system.md. Primitives are static; semantic tokens are
+   mode-aware and flip between .dark / .light on <html>.
+   ========================================================================== */
+
+:root {
+  /* ---- Ink (neutral, cool-tinted) ---- */
+  --ink-950: #0a0e12;
+  --ink-900: #10151a;
+  --ink-800: #181f26;
+  --ink-700: #242c34;
+  --ink-600: #3b454e;
+  --ink-500: #5c6870;
+  --ink-400: #8a97a0;
+  --ink-300: #b7c1c8;
+  --ink-200: #dce3e7;
+  --ink-100: #eef2f4;
+  --ink-50: #f8fafb;
+  --ink-0: #ffffff;
+
+  /* ---- Signal (brand accent, teal/cyan) ---- */
+  --signal-700: #0a5e66;
+  --signal-600: #0e7c86;
+  --signal-500: #14a3ae;
+  --signal-400: #3fc4ce;
+  --signal-300: #7ddde3;
+  --signal-a12: rgba(20, 163, 174, 0.12);
+
+  /* ---- Ember (scarcity/urgency accent) ---- */
+  --ember-600: #b54e0c;
+  --ember-500: #e07a1e;
+  --ember-400: #f3a24f;
+  --ember-a12: rgba(224, 122, 30, 0.12);
+
+  /* ---- Risk / semantic scale ---- */
+  --risk-critical: #e5484d;
+  --risk-high: #e07a1e;
+  --risk-medium: #d9b440;
+  --risk-low: #14a3ae;
+  --risk-success: #2aa876;
+
+  /* ---- Radius ---- */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+
+  /* ---- Motion ---- */
+  --duration-instant: 100ms;
+  --duration-fast: 160ms;
+  --duration-base: 240ms;
+  --duration-moderate: 360ms;
+  --duration-slow: 560ms;
+  --easing-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --easing-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --easing-in: cubic-bezier(0.4, 0, 1, 1);
+
+  /* ---- Semantic tokens: dark mode is the default canvas ---- */
+  --canvas: var(--ink-950);
+  --surface: var(--ink-900);
+  --surface-raised: var(--ink-800);
+  --border: var(--ink-700);
+  --border-muted: var(--ink-800);
+  --text-primary: var(--ink-50);
+  --text-secondary: var(--ink-300);
+  --text-muted: var(--ink-400);
+  --text-inverse: var(--ink-950);
+  --accent: var(--signal-400);
+  --accent-fill: var(--signal-a12);
+  --urgency: var(--ember-400);
+  --urgency-fill: var(--ember-a12);
+  --focus-ring: var(--signal-400);
+  --button-primary-bg: var(--ink-50);
+  --button-primary-fg: var(--ink-950);
+  --button-primary-bg-hover: var(--ink-0);
+  --elevation-glow: rgba(20, 163, 174, 0.06);
+}
+
+.dark {
+  --canvas: var(--ink-950);
+  --surface: var(--ink-900);
+  --surface-raised: var(--ink-800);
+  --border: var(--ink-700);
+  --border-muted: var(--ink-800);
+  --text-primary: var(--ink-50);
+  --text-secondary: var(--ink-300);
+  --text-muted: var(--ink-400);
+  --text-inverse: var(--ink-950);
+  --accent: var(--signal-400);
+  --accent-fill: var(--signal-a12);
+  --urgency: var(--ember-400);
+  --urgency-fill: var(--ember-a12);
+  --focus-ring: var(--signal-400);
+  --button-primary-bg: var(--ink-50);
+  --button-primary-fg: var(--ink-950);
+  --button-primary-bg-hover: var(--ink-0);
+}
+
+.light {
+  --canvas: var(--ink-50);
+  --surface: var(--ink-0);
+  --surface-raised: var(--ink-0);
+  --border: var(--ink-200);
+  --border-muted: var(--ink-100);
+  --text-primary: var(--ink-950);
+  --text-secondary: var(--ink-600);
+  --text-muted: var(--ink-500);
+  --text-inverse: var(--ink-50);
+  --accent: var(--signal-600);
+  --accent-fill: var(--signal-a12);
+  --urgency: var(--ember-600);
+  --urgency-fill: var(--ember-a12);
+  --focus-ring: var(--signal-500);
+  --button-primary-bg: var(--ink-950);
+  --button-primary-fg: var(--ink-50);
+  --button-primary-bg-hover: var(--ink-900);
+}
+
+@theme inline {
+  /* Semantic colors — kept as `inline` so they stay live var() references
+     and respond to .dark / .light swaps rather than being baked in. */
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-border-muted: var(--border-muted);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-inverse: var(--text-inverse);
+  --color-accent: var(--accent);
+  --color-accent-fill: var(--accent-fill);
+  --color-urgency: var(--urgency);
+  --color-urgency-fill: var(--urgency-fill);
+  --color-focus-ring: var(--focus-ring);
+  --color-button-primary-bg: var(--button-primary-bg);
+  --color-button-primary-fg: var(--button-primary-fg);
+
+  --font-display: var(--font-geist-sans), "Neue Montreal", -apple-system, sans-serif;
+  --font-body: var(--font-inter), -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@theme {
+  /* Primitives as static utilities (bg-ink-800, text-signal-500, etc.) */
+  --color-ink-950: #0a0e12;
+  --color-ink-900: #10151a;
+  --color-ink-800: #181f26;
+  --color-ink-700: #242c34;
+  --color-ink-600: #3b454e;
+  --color-ink-500: #5c6870;
+  --color-ink-400: #8a97a0;
+  --color-ink-300: #b7c1c8;
+  --color-ink-200: #dce3e7;
+  --color-ink-100: #eef2f4;
+  --color-ink-50: #f8fafb;
+  --color-ink-0: #ffffff;
+
+  --color-signal-700: #0a5e66;
+  --color-signal-600: #0e7c86;
+  --color-signal-500: #14a3ae;
+  --color-signal-400: #3fc4ce;
+  --color-signal-300: #7ddde3;
+
+  --color-ember-600: #b54e0c;
+  --color-ember-500: #e07a1e;
+  --color-ember-400: #f3a24f;
+
+  --color-risk-critical: #e5484d;
+  --color-risk-high: #e07a1e;
+  --color-risk-medium: #d9b440;
+  --color-risk-low: #14a3ae;
+  --color-risk-success: #2aa876;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 999px;
+
+  --container-max: 1280px;
+
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  html.light {
+    color-scheme: light;
+  }
+
+  body {
+    background: var(--color-canvas);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--signal-a12);
+    color: var(--color-text-primary);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+  }
+}
+
+/* ==========================================================================
+   Type scale — hand-tuned per docs/design/03-typography.md.
+   Named `.type-*` to avoid colliding with Tailwind's own text-* utilities.
+   ========================================================================== */
+@layer components {
+  .type-display-2xl {
+    font-family: var(--font-display);
+    font-size: clamp(2.75rem, 4vw + 1rem, 5rem);
+    line-height: 1.02;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .type-display-xl {
+    font-family: var(--font-display);
+    font-size: clamp(2.25rem, 2.5vw + 1rem, 3.5rem);
+    line-height: 1.05;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  .type-display-lg {
+    font-family: var(--font-display);
+    font-size: clamp(1.875rem, 1.5vw + 1rem, 2.5rem);
+    line-height: 1.1;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .type-display-md {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1vw + 1rem, 1.875rem);
+    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .type-display-sm {
+    font-family: var(--font-display);
+    font-size: clamp(1.25rem, 0.5vw + 1rem, 1.5rem);
+    line-height: 1.2;
+    font-weight: 500;
+  }
+  .type-body-xl {
+    font-family: var(--font-body);
+    font-size: clamp(1.125rem, 0.3vw + 1rem, 1.25rem);
+    line-height: 1.4;
+    font-weight: 400;
+  }
+  .type-body-lg {
+    font-family: var(--font-body);
+    font-size: clamp(1.0625rem, 0.2vw + 1rem, 1.125rem);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .type-body-md {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 400;
+  }
+  .type-body-sm {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    font-weight: 400;
+  }
+  .type-body-xs {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    line-height: 1.4;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .type-mono-md {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    line-height: 1.6;
+    font-weight: 400;
+    font-variant-numeric: tabular-nums;
+  }
+  .type-mono-sm {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .reading-measure {
+    max-width: 42rem;
+  }
+
+  .container-page {
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .container-page {
+      padding-inline: 4rem;
+    }
+  }
+
+  .elevation-1 {
+    box-shadow: 0 1px 2px rgba(16, 21, 26, 0.06);
+  }
+  .light .elevation-1 {
+    box-shadow: 0 1px 2px rgba(16, 21, 26, 0.06);
+  }
+  .dark .elevation-1 {
+    box-shadow: none;
+  }
+  .elevation-2 {
+    box-shadow: 0 4px 12px rgba(16, 21, 26, 0.08);
+  }
+  .dark .elevation-2 {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.24);
+  }
+  .elevation-3 {
+    box-shadow: 0 12px 32px rgba(16, 21, 26, 0.12);
+  }
+  .dark .elevation-3 {
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.36);
+  }
+  .elevation-glow {
+    box-shadow: 0 0 40px var(--elevation-glow);
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+.animate-accordion-down {
+  animation: accordion-down var(--duration-base) var(--easing-standard);
+}
+.animate-accordion-up {
+  animation: accordion-up var(--duration-base) var(--easing-standard);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
