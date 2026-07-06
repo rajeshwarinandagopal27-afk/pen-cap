@@ -1,0 +1,215 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ---------------------------------------------------------------------
+ * PenCap Institute design tokens
+ * See /docs/design/02-design-tokens.md and /docs/design/04-color-system.md
+ * for the full rationale behind every value below.
+ * ------------------------------------------------------------------- */
+@theme {
+  --font-display: var(--font-space-grotesk), "General Sans", "Neue Montreal", -apple-system, sans-serif;
+  --font-sans: var(--font-inter), -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-jetbrains-mono), "IBM Plex Mono", ui-monospace, monospace;
+
+  --breakpoint-xs: 30rem; /* 480px */
+
+  /* Ink neutral primitives (cool-tinted) */
+  --color-ink-950: #0a0e12;
+  --color-ink-900: #10151a;
+  --color-ink-800: #181f26;
+  --color-ink-700: #242c34;
+  --color-ink-600: #3b454e;
+  --color-ink-500: #5c6870;
+  --color-ink-400: #8a97a0;
+  --color-ink-300: #b7c1c8;
+  --color-ink-200: #dce3e7;
+  --color-ink-100: #eef2f4;
+  --color-ink-50: #f8fafb;
+  --color-ink-0: #ffffff;
+
+  /* Signal accent (teal/cyan) */
+  --color-signal-700: #0a5e66;
+  --color-signal-600: #0e7c86;
+  --color-signal-500: #14a3ae;
+  --color-signal-400: #3fc4ce;
+  --color-signal-300: #7ddde3;
+
+  /* Ember accent (scarcity/urgency only) */
+  --color-ember-600: #b54e0c;
+  --color-ember-500: #e07a1e;
+  --color-ember-400: #f3a24f;
+
+  /* Semantic risk scale */
+  --color-risk-critical: #e5484d;
+  --color-risk-high: #e07a1e;
+  --color-risk-medium: #d9b440;
+  --color-risk-low: #14a3ae;
+  --color-risk-success: #2aa876;
+
+  /* Semantic tokens — light mode defaults, overridden under .dark below */
+  --color-canvas: var(--color-ink-50);
+  --color-surface: var(--color-ink-0);
+  --color-surface-raised: var(--color-ink-0);
+  --color-border: var(--color-ink-200);
+  --color-border-muted: var(--color-ink-100);
+  --color-text-primary: var(--color-ink-950);
+  --color-text-secondary: var(--color-ink-600);
+  --color-text-muted: var(--color-ink-500);
+  --color-text-inverse: var(--color-ink-50);
+  --color-accent: var(--color-signal-600);
+  --color-accent-fill: color-mix(in srgb, var(--color-signal-500) 12%, transparent);
+  --color-urgency: var(--color-ember-600);
+  --color-urgency-fill: color-mix(in srgb, var(--color-ember-500) 12%, transparent);
+  --color-focus-ring: var(--color-signal-500);
+
+  /* shadcn/ui compatibility aliases — mapped onto the semantic tokens above
+     so component primitives can use conventional shadcn class names. */
+  --color-background: var(--color-canvas);
+  --color-foreground: var(--color-text-primary);
+  --color-card: var(--color-surface);
+  --color-card-foreground: var(--color-text-primary);
+  --color-popover: var(--color-surface-raised);
+  --color-popover-foreground: var(--color-text-primary);
+  --color-primary: var(--color-text-primary);
+  --color-primary-foreground: var(--color-canvas);
+  --color-secondary: var(--color-surface-raised);
+  --color-secondary-foreground: var(--color-text-primary);
+  --color-muted: var(--color-border-muted);
+  --color-muted-foreground: var(--color-text-muted);
+  --color-input: var(--color-border);
+  --color-ring: var(--color-focus-ring);
+  --color-destructive: var(--color-risk-critical);
+  --color-destructive-foreground: var(--color-ink-0);
+
+  /* Radius */
+  --radius-sm: 0.375rem; /* 6px */
+  --radius-md: 0.625rem; /* 10px */
+  --radius-lg: 0.875rem; /* 14px */
+  --radius-xl: 1.25rem; /* 20px */
+
+  /* Z-index scale */
+  --z-index-base: 0;
+  --z-index-raised: 10;
+  --z-index-sticky-nav: 100;
+  --z-index-sticky-cta: 110;
+  --z-index-dropdown: 200;
+  --z-index-tooltip: 250;
+  --z-index-overlay: 300;
+  --z-index-modal: 310;
+  --z-index-toast: 400;
+
+  /* Motion */
+  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+  --animate-marquee: marquee 32s linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes accordion-down {
+    from {
+      height: 0;
+    }
+    to {
+      height: var(--radix-accordion-content-height);
+    }
+  }
+
+  @keyframes accordion-up {
+    from {
+      height: var(--radix-accordion-content-height);
+    }
+    to {
+      height: 0;
+    }
+  }
+}
+
+.dark {
+  --color-canvas: var(--color-ink-950);
+  --color-surface: var(--color-ink-900);
+  --color-surface-raised: var(--color-ink-800);
+  --color-border: var(--color-ink-700);
+  --color-border-muted: var(--color-ink-800);
+  --color-text-primary: var(--color-ink-50);
+  --color-text-secondary: var(--color-ink-300);
+  --color-text-muted: var(--color-ink-400);
+  --color-text-inverse: var(--color-ink-950);
+  --color-accent: var(--color-signal-400);
+  --color-urgency: var(--color-ember-400);
+  --color-focus-ring: var(--color-signal-400);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-text-primary);
+    font-family: var(--font-sans);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus-ring);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .container-page {
+    width: 100%;
+    max-width: 80rem;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+
+  @variant sm {
+    .container-page {
+      padding-inline: 2rem;
+    }
+  }
+
+  @variant lg {
+    .container-page {
+      padding-inline: 4rem;
+    }
+  }
+
+  .container-reading {
+    width: 100%;
+    max-width: 45rem;
+    margin-inline: auto;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
