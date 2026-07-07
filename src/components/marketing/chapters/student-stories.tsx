@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/marketing/reveal";
 import { EmployerStrip } from "@/components/marketing/employer-strip";
+import { SectionEyebrow } from "@/components/marketing/section-eyebrow";
 import { studentStories } from "@/lib/data/stories";
 import { testimonials } from "@/lib/data/testimonials";
 
@@ -19,7 +20,7 @@ export function StudentStories() {
     <section id="people" className="relative overflow-hidden bg-canvas py-28 sm:py-36">
       <div className="container-page">
         <div className="mb-16 max-w-xl">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">Chapter Seven — The People</p>
+          <SectionEyebrow>Chapter Seven — The People</SectionEyebrow>
           <h2 className="mt-4 font-display text-3xl font-semibold leading-tight tracking-tight text-text-primary sm:text-4xl">
             Not testimonials. Transformations.
           </h2>

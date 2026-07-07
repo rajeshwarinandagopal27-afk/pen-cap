@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NetworkMotif } from "@/components/marketing/network-motif";
 import { Reveal } from "@/components/marketing/reveal";
+import { SectionEyebrow } from "@/components/marketing/section-eyebrow";
 
 export function FutureCta() {
   return (
@@ -12,7 +13,7 @@ export function FutureCta() {
       <NetworkMotif className="right-[-6rem] bottom-[-4rem] hidden lg:block" />
       <div className="container-page relative flex flex-col items-start gap-8">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">Chapter Eight — The Future</p>
+          <SectionEyebrow>Chapter Eight — The Future</SectionEyebrow>
         </Reveal>
 
         <Reveal delay={0.06}>

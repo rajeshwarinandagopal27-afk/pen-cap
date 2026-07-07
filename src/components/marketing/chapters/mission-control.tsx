@@ -5,13 +5,14 @@ import { Shield, Crosshair, Radar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Reveal } from "@/components/marketing/reveal";
+import { SectionEyebrow } from "@/components/marketing/section-eyebrow";
 import {
   blueTeamPlaybook,
   cloudFindings,
   killChain,
+  networkSegments,
   redTeamPlaybook,
   socAlerts,
-  threatNodes,
 } from "@/lib/data/mission-control";
 import { siteStats } from "@/lib/data/stats";
 import { cn } from "@/lib/utils";
@@ -28,36 +29,36 @@ export function MissionControl() {
   return (
     <section
       id="mission-control"
-      className="dark relative overflow-hidden border-y border-border bg-canvas py-24 text-text-primary sm:py-32"
+      className="dark relative overflow-hidden border-y border-border bg-canvas py-28 text-text-primary sm:py-36"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.35]"
+        className="pointer-events-none absolute inset-0 opacity-[0.5]"
         style={{
           backgroundImage:
-            "radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--color-signal-500) 30%, transparent) 1px, transparent 0)",
-          backgroundSize: "28px 28px",
+            "radial-gradient(circle at 1px 1px, color-mix(in srgb, var(--color-ink-300) 14%, transparent) 1px, transparent 0)",
+          backgroundSize: "32px 32px",
         }}
       />
 
       <div className="container-page relative">
         <div className="flex flex-col gap-4">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">Chapter Four — Mission Control</p>
+          <SectionEyebrow>Chapter Four — Mission Control</SectionEyebrow>
           <h2 className="max-w-xl font-display text-3xl font-semibold leading-tight tracking-tight text-balance sm:text-4xl">
             Not a curriculum. An operations center.
           </h2>
           <p className="max-w-xl text-base leading-relaxed text-text-secondary">
             This is the environment you train inside every day — the same telemetry, the same
-            playbooks, the same pressure a real SOC or red team runs on.
+            playbooks, the same architecture a real SOC or red team runs on.
           </p>
         </div>
 
         <Reveal className="mt-10">
-          <div className="rounded-[var(--radius-xl)] border border-border bg-surface-raised p-3 shadow-[0_24px_64px_rgba(16,21,26,0.24)] sm:p-6">
+          <div className="rounded-[var(--radius-xl)] border border-border bg-surface-raised/85 p-3 shadow-[0_24px_64px_rgba(8,11,16,0.28)] backdrop-blur-sm sm:p-6">
             <Tabs defaultValue="soc">
               <TabsList>
                 <TabsTrigger value="soc">SOC Dashboard</TabsTrigger>
-                <TabsTrigger value="threat-map">Threat Map</TabsTrigger>
+                <TabsTrigger value="topology">Network Topology</TabsTrigger>
                 <TabsTrigger value="timeline">Attack Timeline</TabsTrigger>
                 <TabsTrigger value="blue">Blue Team</TabsTrigger>
                 <TabsTrigger value="red">Red Team</TabsTrigger>
@@ -67,8 +68,8 @@ export function MissionControl() {
               <TabsContent value="soc">
                 <SocPanel />
               </TabsContent>
-              <TabsContent value="threat-map">
-                <ThreatMapPanel />
+              <TabsContent value="topology">
+                <NetworkTopologyPanel />
               </TabsContent>
               <TabsContent value="timeline">
                 <TimelinePanel />
@@ -86,7 +87,7 @@ export function MissionControl() {
           </div>
         </Reveal>
 
-        <p className="mt-8 text-center font-mono text-xs text-text-muted">
+        <p className="mt-8 text-center text-xs text-text-muted">
           {siteStats.mentorRatio.prefix}
           {siteStats.mentorRatio.value} mentor ratio &nbsp;·&nbsp; 144+ hands-on labs &nbsp;·&nbsp;{" "}
           {siteStats.facultyCves.value} CVEs credited to faculty
@@ -100,11 +101,8 @@ function SocPanel() {
   return (
     <div className="min-h-[20rem] p-3">
       <div className="mb-4 flex items-center gap-2">
-        <span className="relative flex size-2">
-          <span className="absolute inline-flex size-full animate-ping rounded-full bg-risk-critical opacity-75" />
-          <span className="relative inline-flex size-2 rounded-full bg-risk-critical" />
-        </span>
-        <p className="font-mono text-xs uppercase tracking-wider text-text-muted">Live alert feed</p>
+        <span className="size-1.5 rounded-full bg-risk-success" aria-hidden="true" />
+        <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Live alert feed</p>
       </div>
       <div className="flex flex-col divide-y divide-border-muted">
         {socAlerts.map((alert) => (
@@ -122,29 +120,47 @@ function SocPanel() {
   );
 }
 
-function ThreatMapPanel() {
+const segmentStatusDot: Record<string, string> = {
+  healthy: "bg-risk-success",
+  monitored: "bg-signal-400",
+  alert: "bg-risk-high",
+};
+
+function NetworkTopologyPanel() {
+  const { nodes, edges } = networkSegments;
+  const nodeMap = new Map(nodes.map((node) => [node.id, node]));
+
   return (
-    <div className="relative min-h-[20rem] overflow-hidden rounded-[var(--radius-md)] border border-border-muted bg-canvas p-3">
-      <div className="relative aspect-[16/8] w-full">
-        {threatNodes.map((node) => (
+    <div className="min-h-[20rem] rounded-[var(--radius-md)] border border-border-muted bg-canvas p-4 sm:p-6">
+      <div className="relative aspect-[16/7] w-full">
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="absolute inset-0 size-full text-border"
+          aria-hidden="true"
+        >
+          <g stroke="currentColor" strokeWidth="0.5" fill="none">
+            {edges.map(([a, b]) => {
+              const from = nodeMap.get(a);
+              const to = nodeMap.get(b);
+              if (!from || !to) return null;
+              return <line key={`${a}-${b}`} x1={from.x} y1={from.y} x2={to.x} y2={to.y} />;
+            })}
+          </g>
+        </svg>
+        {nodes.map((node) => (
           <div
-            key={node.label}
-            className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center"
+            key={node.id}
+            className="absolute flex -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-1.5"
             style={{ left: `${node.x}%`, top: `${node.y}%` }}
           >
-            <span className="relative flex" style={{ width: 8 + node.count / 20, height: 8 + node.count / 20 }}>
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-signal-400 opacity-40" />
-              <span className="relative inline-flex size-full rounded-full bg-signal-400" />
-            </span>
-            <span className="mt-2 whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-text-muted">
-              {node.label}
-            </span>
-            <span className="font-mono text-xs text-text-primary">{node.count}</span>
+            <span className={cn("size-2.5 rounded-full ring-4 ring-canvas", segmentStatusDot[node.status])} />
+            <span className="whitespace-nowrap text-[11px] text-text-secondary">{node.label}</span>
           </div>
         ))}
       </div>
       <p className="mt-4 text-center text-xs text-text-muted">
-        Simulated telemetry from the Cyber Range — illustrative of the traffic students triage daily.
+        A simplified view of the architecture students learn to defend — edge, application, and data tiers.
       </p>
     </div>
   );
@@ -203,7 +219,7 @@ function CloudPanel() {
     <div className="min-h-[20rem] p-3">
       <div className="mb-3 flex items-center gap-2">
         <Radar className="size-4 text-signal-400" aria-hidden="true" />
-        <p className="font-mono text-xs uppercase tracking-wider text-text-muted">Misconfiguration scan</p>
+        <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Misconfiguration scan</p>
       </div>
       <div className="flex flex-col divide-y divide-border-muted">
         {cloudFindings.map((finding) => (

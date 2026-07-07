@@ -5,7 +5,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { HeroResolveText } from "@/components/marketing/hero-resolve-text";
 import { NetworkMotif } from "@/components/marketing/network-motif";
 
 const fadeUp = {
@@ -26,10 +25,10 @@ export function CinematicHero() {
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(55% 50% at 50% 28%, color-mix(in srgb, var(--color-signal-500) 20%, transparent), transparent 72%)",
+            "radial-gradient(60% 55% at 50% 22%, color-mix(in srgb, var(--color-signal-500) 10%, transparent), transparent 75%)",
         }}
       />
-      <NetworkMotif className="left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 opacity-[0.05] lg:block" />
+      <NetworkMotif className="left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 opacity-[0.04] lg:block" />
 
       <div className="container-page relative flex flex-col items-start gap-8 py-32">
         <motion.p
@@ -37,18 +36,22 @@ export function CinematicHero() {
           animate="visible"
           variants={fadeUp}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="font-mono text-xs uppercase tracking-[0.3em] text-signal-300"
+          className="text-xs font-semibold uppercase tracking-[0.2em] text-signal-300"
         >
           PenCap Institute of Excellence
         </motion.p>
 
-        <h1 className="max-w-4xl font-display text-[clamp(2.75rem,6vw+1rem,7rem)] font-semibold leading-[0.98] tracking-tight text-balance">
-          <HeroResolveText text="What kind of future" />
+        <motion.h1
+          initial={reduceMotion ? false : "hidden"}
+          animate="visible"
+          variants={fadeUp}
+          transition={{ duration: 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-4xl font-display text-[clamp(2.75rem,6vw+1rem,7rem)] font-semibold leading-[0.98] tracking-tight text-balance"
+        >
+          What kind of future
           <br />
-          <span className="text-signal-300">
-            <HeroResolveText text="could you have?" />
-          </span>
-        </h1>
+          <span className="text-signal-300">could you have?</span>
+        </motion.h1>
 
         <motion.p
           initial={reduceMotion ? false : "hidden"}
@@ -76,10 +79,10 @@ export function CinematicHero() {
         href="#fear"
         aria-label="Scroll to continue"
         className="absolute bottom-10 left-1/2 -translate-x-1/2 text-text-muted transition-colors hover:text-text-primary"
-        animate={reduceMotion ? undefined : { y: [0, 8, 0] }}
-        transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+        animate={reduceMotion ? undefined : { opacity: [0.4, 0.9, 0.4] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       >
-        <ArrowDown className="size-5" aria-hidden="true" />
+        <ArrowDown className="size-4" aria-hidden="true" />
       </motion.a>
     </section>
   );

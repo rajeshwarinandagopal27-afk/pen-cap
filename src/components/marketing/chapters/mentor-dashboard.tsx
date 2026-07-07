@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/marketing/reveal";
+import { SectionEyebrow } from "@/components/marketing/section-eyebrow";
 
 const skills = [
   { label: "Networking", value: 82 },
@@ -14,10 +15,10 @@ const skills = [
 
 export function MentorDashboard() {
   return (
-    <section id="mentor" className="relative overflow-hidden border-y border-border-muted bg-canvas py-24 sm:py-32">
-      <div className="container-page grid gap-12 lg:grid-cols-[0.85fr_1fr] lg:items-center lg:gap-16">
+    <section id="mentor" className="relative overflow-hidden border-y border-border-muted bg-canvas py-28 sm:py-36">
+      <div className="container-page grid gap-12 lg:grid-cols-[0.85fr_1fr] lg:items-center lg:gap-20">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">Chapter Three — The Mentor</p>
+          <SectionEyebrow>Chapter Three — The Mentor</SectionEyebrow>
           <h2 className="mt-4 max-w-md font-display text-3xl font-semibold leading-tight tracking-tight text-text-primary sm:text-4xl">
             Someone is actually watching your growth.
           </h2>
@@ -37,10 +38,10 @@ export function MentorDashboard() {
 
 function MentorCard() {
   return (
-    <div className="rounded-[var(--radius-xl)] border border-border bg-surface-raised p-6 shadow-[0_24px_64px_rgba(16,21,26,0.12)] sm:p-8">
+    <div className="rounded-[var(--radius-xl)] border border-border bg-surface-raised/90 p-6 shadow-[0_24px_64px_rgba(8,11,16,0.14)] backdrop-blur-sm sm:p-8">
       <div className="flex items-center justify-between gap-4 border-b border-border-muted pb-5">
         <div>
-          <p className="font-mono text-xs uppercase tracking-wider text-text-muted">Week 8 Review</p>
+          <p className="text-xs font-semibold uppercase tracking-wider text-text-muted">Week 8 Review</p>
           <p className="mt-1 font-display text-lg font-semibold text-text-primary">Riya Sharma</p>
         </div>
         <div className="flex size-10 items-center justify-center rounded-full bg-accent-fill font-mono text-sm font-medium text-accent">
@@ -69,7 +70,7 @@ function MentorCard() {
       </div>
 
       <div className="mt-6 rounded-[var(--radius-md)] border border-border-muted bg-canvas p-4">
-        <p className="font-mono text-[11px] uppercase tracking-wider text-text-muted">Mentor notes — Priya Raman</p>
+        <p className="text-[11px] font-semibold uppercase tracking-wider text-text-muted">Mentor notes — Priya Raman</p>
         <p className="mt-1.5 text-sm leading-relaxed text-text-secondary">
           “Riya's log analysis is already interview-ready. Push her on incident write-ups next —
           that's the last gap before SOC-ready.”

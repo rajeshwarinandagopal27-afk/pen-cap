@@ -15,38 +15,41 @@
 
   --breakpoint-xs: 30rem; /* 480px */
 
-  /* Ink neutral primitives (cool-tinted) */
-  --color-ink-950: #0a0e12;
-  --color-ink-900: #10151a;
-  --color-ink-800: #181f26;
-  --color-ink-700: #242c34;
-  --color-ink-600: #3b454e;
-  --color-ink-500: #5c6870;
-  --color-ink-400: #8a97a0;
-  --color-ink-300: #b7c1c8;
-  --color-ink-200: #dce3e7;
-  --color-ink-100: #eef2f4;
-  --color-ink-50: #f8fafb;
+  /* Ink neutral primitives — deep navy/charcoal, warming slightly at the
+     lightest steps so light mode reads as "warm white" rather than clinical
+     gray. This is the enterprise-SaaS neutral scale the whole site sits on. */
+  --color-ink-950: #080b10;
+  --color-ink-900: #0e131a;
+  --color-ink-800: #161c25;
+  --color-ink-700: #232a35;
+  --color-ink-600: #3a4250;
+  --color-ink-500: #5c6675;
+  --color-ink-400: #8891a0;
+  --color-ink-300: #b6bec9;
+  --color-ink-200: #dde1e7;
+  --color-ink-100: #f0efec;
+  --color-ink-50: #f9f8f6;
   --color-ink-0: #ffffff;
 
-  /* Signal accent (teal/cyan) */
-  --color-signal-700: #0a5e66;
-  --color-signal-600: #0e7c86;
-  --color-signal-500: #14a3ae;
-  --color-signal-400: #3fc4ce;
-  --color-signal-300: #7ddde3;
+  /* Signal accent — one premium soft blue, used for every interactive/
+     accent moment on the site. Deliberately restrained: no cyan, no glow. */
+  --color-signal-700: #23407e;
+  --color-signal-600: #2f57a3;
+  --color-signal-500: #4a72c4;
+  --color-signal-400: #7fa0da;
+  --color-signal-300: #accbf0;
 
   /* Ember accent (scarcity/urgency only) */
-  --color-ember-600: #b54e0c;
-  --color-ember-500: #e07a1e;
-  --color-ember-400: #f3a24f;
+  --color-ember-600: #b0530f;
+  --color-ember-500: #d97e28;
+  --color-ember-400: #eba658;
 
-  /* Semantic risk scale */
-  --color-risk-critical: #e5484d;
-  --color-risk-high: #e07a1e;
-  --color-risk-medium: #d9b440;
-  --color-risk-low: #14a3ae;
-  --color-risk-success: #2aa876;
+  /* Semantic risk scale — muted, dashboard-grade, never neon */
+  --color-risk-critical: #c95058;
+  --color-risk-high: #cb8a3f;
+  --color-risk-medium: #c2ab55;
+  --color-risk-low: #7391b8;
+  --color-risk-success: #4f9c7e;
 
   /* Semantic tokens — light mode defaults, overridden under .dark below */
   --color-canvas: var(--color-ink-50);

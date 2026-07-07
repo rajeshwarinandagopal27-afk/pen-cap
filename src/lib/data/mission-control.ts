@@ -15,21 +15,41 @@ export const socAlerts: SocAlert[] = [
   { time: "02:17:12", severity: "success", title: "Session terminated, source IP blocked", source: "soc-response" },
 ];
 
-export interface ThreatNode {
+export type SegmentStatus = "healthy" | "monitored" | "alert";
+
+export interface NetworkNode {
+  id: string;
   label: string;
   x: number;
   y: number;
-  count: number;
+  status: SegmentStatus;
 }
 
-export const threatNodes: ThreatNode[] = [
-  { label: "North America", x: 18, y: 34, count: 214 },
-  { label: "South America", x: 30, y: 68, count: 42 },
-  { label: "Europe", x: 50, y: 24, count: 337 },
-  { label: "Middle East & Africa", x: 58, y: 56, count: 88 },
-  { label: "Asia Pacific", x: 80, y: 40, count: 261 },
-  { label: "Oceania", x: 86, y: 78, count: 19 },
-];
+export interface NetworkSegments {
+  nodes: NetworkNode[];
+  edges: [string, string][];
+}
+
+export const networkSegments: NetworkSegments = {
+  nodes: [
+    { id: "internet", label: "Internet", x: 6, y: 50, status: "monitored" },
+    { id: "firewall", label: "Edge Firewall", x: 27, y: 50, status: "healthy" },
+    { id: "dmz", label: "DMZ", x: 48, y: 22, status: "monitored" },
+    { id: "lb", label: "Load Balancer", x: 48, y: 78, status: "healthy" },
+    { id: "app", label: "App Tier", x: 69, y: 50, status: "monitored" },
+    { id: "data", label: "Data Tier", x: 92, y: 22, status: "healthy" },
+    { id: "iam", label: "Cloud IAM", x: 92, y: 78, status: "alert" },
+  ],
+  edges: [
+    ["internet", "firewall"],
+    ["firewall", "dmz"],
+    ["firewall", "lb"],
+    ["dmz", "app"],
+    ["lb", "app"],
+    ["app", "data"],
+    ["app", "iam"],
+  ],
+};
 
 export interface KillChainStep {
   stage: string;
