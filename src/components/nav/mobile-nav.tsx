@@ -15,14 +15,15 @@ import {
 } from "@/components/ui/sheet";
 import { primaryNavLinks } from "@/lib/data/nav";
 import { programs } from "@/lib/data/programs";
+import { cn } from "@/lib/utils";
 
-export function MobileNav() {
+export function MobileNav({ triggerClassName }: { triggerClassName?: string }) {
   const [open, setOpen] = React.useState(false);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button variant="ghost" size="sm" className="px-2 md:hidden" aria-label="Open menu">
+        <Button variant="ghost" size="sm" className={cn("px-2 md:hidden", triggerClassName)} aria-label="Open menu">
           <Menu className="size-6" aria-hidden="true" />
         </Button>
       </SheetTrigger>

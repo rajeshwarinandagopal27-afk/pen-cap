@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ShieldHalf } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -13,6 +14,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 
 export function SiteNav() {
   const [scrolled, setScrolled] = React.useState(false);
+  const pathname = usePathname();
 
   React.useEffect(() => {
     function onScroll() {
@@ -22,6 +24,12 @@ export function SiteNav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // The homepage opens on a full-bleed cinematic hero that stays dark
+  // regardless of the site's light/dark theme — while the header floats
+  // transparently over it, its text needs to match that hero, not the
+  // ambient theme.
+  const overHero = pathname === "/" && !scrolled;
 
   return (
     <header
@@ -33,18 +41,27 @@ export function SiteNav() {
       )}
     >
       <div className="container-page flex items-center justify-between gap-6">
-        <Link href="/" className="flex items-center gap-2 font-display text-lg font-semibold tracking-tight text-text-primary">
+        <Link
+          href="/"
+          className={cn(
+            "flex items-center gap-2 font-display text-lg font-semibold tracking-tight transition-colors",
+            overHero ? "text-ink-50" : "text-text-primary"
+          )}
+        >
           <ShieldHalf className="size-6 text-accent" aria-hidden="true" />
           PenCap Institute
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex" aria-label="Primary">
-          <ProgramsMenu />
+          <ProgramsMenu triggerClassName={overHero ? "text-ink-300 hover:text-ink-50" : undefined} />
           {primaryNavLinks.slice(1).map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-text-secondary transition-colors hover:text-text-primary"
+              className={cn(
+                "text-sm font-medium transition-colors",
+                overHero ? "text-ink-300 hover:text-ink-50" : "text-text-secondary hover:text-text-primary"
+              )}
             >
               {link.label}
             </Link>
@@ -52,17 +69,24 @@ export function SiteNav() {
         </nav>
 
         <div className="flex items-center gap-3">
-          <ThemeToggle />
+          <ThemeToggle className={overHero ? "text-ink-50 hover:bg-ink-50/10" : undefined} />
           <Link
             href="/login"
-            className="hidden text-sm font-medium text-text-secondary transition-colors hover:text-text-primary sm:block"
+            className={cn(
+              "hidden text-sm font-medium transition-colors sm:block",
+              overHero ? "text-ink-300 hover:text-ink-50" : "text-text-secondary hover:text-text-primary"
+            )}
           >
             Log in
           </Link>
-          <Button asChild size="md" className="hidden sm:inline-flex">
+          <Button
+            asChild
+            size="md"
+            className={cn("hidden sm:inline-flex", overHero && "bg-ink-50 text-ink-950 hover:bg-ink-100")}
+          >
             <Link href="/admissions">Apply Now</Link>
           </Button>
-          <MobileNav />
+          <MobileNav triggerClassName={overHero ? "text-ink-50 hover:bg-ink-50/10" : undefined} />
         </div>
       </div>
     </header>

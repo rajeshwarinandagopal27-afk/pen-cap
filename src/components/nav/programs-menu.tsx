@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import { programs } from "@/lib/data/programs";
 import { cyberRangeCategories } from "@/lib/data/cyber-range";
 
-export function ProgramsMenu() {
+export function ProgramsMenu({ triggerClassName }: { triggerClassName?: string }) {
   const [open, setOpen] = React.useState(false);
   const containerRef = React.useRef<HTMLDivElement>(null);
 
@@ -41,7 +41,7 @@ export function ProgramsMenu() {
         aria-expanded={open}
         aria-haspopup="true"
         onClick={() => setOpen((v) => !v)}
-        className="text-sm font-medium text-text-secondary transition-colors hover:text-text-primary"
+        className={cn("text-sm font-medium text-text-secondary transition-colors hover:text-text-primary", triggerClassName)}
       >
         Programs
       </button>
