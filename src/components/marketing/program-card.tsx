@@ -1,62 +1,82 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRightIcon, ClockIcon, TrendingUpIcon, UsersIcon } from "lucide-react";
 
 import type { Program } from "@/lib/types";
-import { Card } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
-import { formatUsd } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Reveal } from "@/components/marketing/reveal";
 
-const levelVariant = {
-  beginner: "low",
-  intermediate: "medium",
-  advanced: "high",
+const accentMap = {
+  royal: "from-royal-500/10 to-transparent text-royal-600 dark:text-royal-400",
+  navy: "from-navy-700/15 to-transparent text-navy-700 dark:text-white",
+  red: "from-red-500/10 to-transparent text-red-600 dark:text-red-400",
 } as const;
 
-export function ProgramCard({ program }: { program: Program }) {
+export function ProgramCard({ program, delay = 0 }: { program: Program; delay?: number }) {
   return (
-    <Card className="group flex h-full flex-col p-6 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_4px_12px_rgba(16,21,26,0.08)]">
-      <div className="flex items-center justify-between gap-2">
-        <p className="text-xs font-semibold uppercase tracking-wider text-accent">
-          {program.category === "offensive" && "Offensive Security"}
-          {program.category === "defensive" && "Defensive Security"}
-          {program.category === "cloud" && "Cloud Security"}
-          {program.category === "advanced" && "Advanced Specialization"}
-        </p>
-        <Badge variant={levelVariant[program.level]}>{program.level}</Badge>
-      </div>
+    <Reveal delay={delay} className="h-full">
+      <Card className="group relative h-full overflow-hidden transition-shadow hover:shadow-lg">
+        <div
+          className={cn(
+            "pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b",
+            accentMap[program.accentColor]
+          )}
+        />
+        <CardHeader className="relative">
+          <Badge variant="accent" className="w-fit">
+            {program.level}
+          </Badge>
+          <h3 className="mt-3 text-xl font-semibold text-foreground">{program.shortName}</h3>
+          <p className="text-sm text-muted-foreground">{program.tagline}</p>
+        </CardHeader>
+        <CardContent className="relative flex flex-1 flex-col gap-5">
+          <div className="grid grid-cols-3 gap-2 text-xs">
+            <div className="flex flex-col gap-1 rounded-lg bg-secondary/60 p-2.5">
+              <ClockIcon className="size-3.5 text-muted-foreground" />
+              <span className="font-medium text-foreground">{program.duration}</span>
+            </div>
+            <div className="flex flex-col gap-1 rounded-lg bg-secondary/60 p-2.5">
+              <UsersIcon className="size-3.5 text-muted-foreground" />
+              <span className="font-medium text-foreground">{program.batchSize}</span>
+            </div>
+            <div className="flex flex-col gap-1 rounded-lg bg-secondary/60 p-2.5">
+              <TrendingUpIcon className="size-3.5 text-muted-foreground" />
+              <span className="font-medium text-foreground">{program.averageSalaryRange}</span>
+            </div>
+          </div>
 
-      <h3 className="mt-3 font-display text-xl font-semibold leading-tight text-text-primary">
-        {program.name}
-      </h3>
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">Who it&rsquo;s for</p>
+            <ul className="mt-2 space-y-1.5 text-sm text-foreground/90">
+              {program.whoFor.slice(0, 2).map((item) => (
+                <li key={item} className="flex gap-2">
+                  <span className="mt-2 size-1 shrink-0 rounded-full bg-royal-500" />
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-      <p className="mt-2 font-mono text-2xl font-medium tabular-nums text-text-primary">
-        {program.outcomeStat}{" "}
-        <span className="font-sans text-sm font-normal text-text-secondary">{program.outcomeStatLabel}</span>
-      </p>
+          <div className="flex flex-wrap gap-1.5">
+            {program.skills.slice(0, 4).map((skill) => (
+              <Badge key={skill} variant="outline" className="text-[11px]">
+                {skill}
+              </Badge>
+            ))}
+          </div>
 
-      <div className="mt-4 flex flex-wrap gap-1.5">
-        {program.skills.slice(0, 4).map((skill) => (
-          <span key={skill} className="rounded-[var(--radius-sm)] bg-surface-raised px-2.5 py-1 text-xs text-text-secondary">
-            {skill}
-          </span>
-        ))}
-      </div>
-
-      <div className="mt-6 flex items-center justify-between gap-4 border-t border-border-muted pt-4 text-sm">
-        <div>
-          <p className="text-text-secondary">
-            {program.durationWeeks} weeks · {program.format === "cohort" ? "Cohort-based" : "Self-paced"}
-          </p>
-          <p className="font-medium text-text-primary">{formatUsd(program.priceUsd)}</p>
-        </div>
-        <Link
-          href={`/programs/${program.slug}`}
-          className="inline-flex shrink-0 items-center gap-1 rounded-[var(--radius-sm)] border border-border px-3.5 py-2 text-sm font-medium text-text-primary transition-colors group-hover:border-accent group-hover:text-accent"
-        >
-          View program
-          <ArrowRight className="size-3.5" aria-hidden="true" />
-        </Link>
-      </div>
-    </Card>
+          <div className="mt-auto flex items-center gap-3 pt-2">
+            <Button asChild className="flex-1">
+              <Link href={`/courses/${program.slug}`}>
+                Explore Program
+                <ArrowRightIcon />
+              </Link>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+    </Reveal>
   );
 }

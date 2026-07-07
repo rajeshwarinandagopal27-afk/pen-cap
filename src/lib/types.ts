@@ -1,82 +1,60 @@
-export type Level = "beginner" | "intermediate" | "advanced";
-export type Format = "cohort" | "self-paced";
-export type RiskLevel = "low" | "medium" | "high" | "critical";
-
-export interface CurriculumModule {
-  weekRange: string;
-  title: string;
-  description: string;
-  skills: string[];
-}
-
-export interface Program {
+export type Program = {
   slug: string;
   name: string;
   shortName: string;
-  category: "offensive" | "defensive" | "cloud" | "advanced";
   tagline: string;
-  level: Level;
-  format: Format;
-  durationWeeks: number;
-  nextCohort: string;
-  seatsRemaining: number;
-  totalSeats: number;
-  priceUsd: number;
-  outcomeStat: string;
-  outcomeStatLabel: string;
+  level: "Foundation" | "Advanced" | "Master";
+  duration: string;
+  format: string;
+  batchSize: string;
+  whoFor: string[];
+  outcome: string;
+  outcomes: string[];
   skills: string[];
-  description: string;
-  idealFor: string[];
-  notIdealFor: { text: string; alternativeSlug?: string }[];
-  prerequisites: string[];
-  curriculum: CurriculumModule[];
-  facultySlugs: string[];
-  testimonialIds: string[];
-}
+  tools: string[];
+  modules: { title: string; topics: string[] }[];
+  certifications: string[];
+  averageSalaryRange: string;
+  jobRoles: string[];
+  featured?: boolean;
+  accentColor: "royal" | "navy" | "red";
+};
 
-export interface FacultyMember {
-  slug: string;
-  name: string;
-  title: string;
-  credibilityLine: string;
-  bio: string;
-  credentials: string[];
-  photoAlt: string;
-  programs: string[];
-}
-
-export interface Testimonial {
+export type Testimonial = {
   id: string;
   name: string;
+  role: string;
+  company: string;
   program: string;
-  programSlug: string;
-  currentRole: string;
-  currentCompany: string;
   quote: string;
-  outcomeChip?: string;
-  hasVideo?: boolean;
-  background: string;
-  photoAlt: string;
-}
+  rating: number;
+  source: "Google" | "LinkedIn" | "Video";
+  avatarInitials: string;
+  videoThumbnail?: string;
+};
 
-export interface FaqItem {
+export type FacultyMember = {
+  id: string;
+  name: string;
+  title: string;
+  bio: string;
+  credentials: string[];
+  experienceYears: number;
+  initials: string;
+};
+
+export type FaqItem = {
   question: string;
   answer: string;
-}
+  category: string;
+};
 
-export interface EmployerCaseStudy {
-  company: string;
-  industry: string;
-  headline: string;
-  result: string;
-  quote: string;
-  attributedTo: string;
-}
-
-export interface CyberRangeCategory {
-  slug: string;
+export type PlacementPartner = {
   name: string;
+};
+
+export type JobRole = {
+  title: string;
+  salaryRange: string;
   description: string;
-  challengeCount: number;
-  difficulty: RiskLevel;
-}
+};

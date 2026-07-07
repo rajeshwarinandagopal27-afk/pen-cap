@@ -1,32 +1,30 @@
 import type { FacultyMember } from "@/lib/types";
-import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/marketing/reveal";
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((part) => part[0])
-    .join("");
-}
-
-export function FacultyCard({ member }: { member: FacultyMember }) {
+export function FacultyCard({ faculty, delay = 0 }: { faculty: FacultyMember; delay?: number }) {
   return (
-    <Card className="flex h-full flex-col gap-4 p-6">
-      <Avatar className="size-16" aria-hidden="true">
-        <AvatarFallback className="text-lg">{initials(member.name)}</AvatarFallback>
-      </Avatar>
-      <div>
-        <h3 className="font-display text-lg font-semibold text-text-primary">{member.name}</h3>
-        <p className="text-sm text-text-secondary">{member.title}</p>
+    <Reveal delay={delay} className="h-full">
+      <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-6">
+        <div className="flex items-center gap-4">
+          <Avatar className="size-14">
+            <AvatarFallback className="text-base">{faculty.initials}</AvatarFallback>
+          </Avatar>
+          <div>
+            <h3 className="text-base font-semibold text-foreground">{faculty.name}</h3>
+            <p className="text-sm text-muted-foreground">{faculty.title}</p>
+          </div>
+        </div>
+        <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">{faculty.bio}</p>
+        <div className="mt-4 flex flex-wrap gap-1.5">
+          {faculty.credentials.map((cred) => (
+            <Badge key={cred} variant="outline" className="text-[11px]">
+              {cred}
+            </Badge>
+          ))}
+        </div>
       </div>
-      <p className="font-mono text-xs leading-relaxed text-accent">{member.credibilityLine}</p>
-      <ul className="mt-auto flex flex-col gap-1.5 border-t border-border-muted pt-4">
-        {member.credentials.slice(0, 3).map((credential) => (
-          <li key={credential} className="text-xs text-text-muted">
-            {credential}
-          </li>
-        ))}
-      </ul>
-    </Card>
+    </Reveal>
   );
 }

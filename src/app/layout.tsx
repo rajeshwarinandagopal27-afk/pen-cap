@@ -1,61 +1,51 @@
-import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteNav } from "@/components/nav/site-nav";
 import { SiteFooter } from "@/components/nav/site-footer";
+import { StickyMobileCta } from "@/components/marketing/sticky-mobile-cta";
+import { WhatsappFloat } from "@/components/marketing/whatsapp-float";
 import { Toaster } from "@/components/ui/sonner";
-import { JsonLd } from "@/components/json-ld";
+import { OrganizationJsonLd } from "@/components/json-ld";
 import { siteConfig } from "@/lib/site-config";
 
-const inter = Inter({
-  variable: "--font-inter",
+const geistSans = Geist({
+  variable: "--font-geist-sans",
   subsets: ["latin"],
-  display: "swap",
 });
 
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
   subsets: ["latin"],
-  display: "swap",
-  weight: ["500", "600", "700"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
-  subsets: ["latin"],
-  display: "swap",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.name} — ${siteConfig.tagline}`,
-    template: `%s — ${siteConfig.name}`,
+    default: `${siteConfig.name} | Cybersecurity Training Institute in Chennai`,
+    template: `%s | ${siteConfig.shortName}`,
   },
   description: siteConfig.description,
-  keywords: [
-    "cybersecurity training",
-    "penetration testing course",
-    "SOC analyst training",
-    "cloud security certificate",
-    "offensive security program",
-    "cybersecurity bootcamp",
-  ],
+  keywords: [...siteConfig.keywords],
   authors: [{ name: siteConfig.name }],
   creator: siteConfig.name,
+  applicationName: siteConfig.shortName,
+  formatDetection: { telephone: true, email: true, address: true },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: siteConfig.locale,
     url: siteConfig.url,
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name} | Cybersecurity Training Institute in Chennai`,
     description: siteConfig.description,
     siteName: siteConfig.name,
+    images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.name} — ${siteConfig.tagline}`,
+    title: `${siteConfig.name} | Cybersecurity Training Institute in Chennai`,
     description: siteConfig.description,
+    images: [siteConfig.ogImage],
   },
   robots: {
     index: true,
@@ -65,17 +55,19 @@ export const metadata: Metadata = {
       follow: true,
       "max-image-preview": "large",
       "max-snippet": -1,
+      "max-video-preview": -1,
     },
+  },
+  alternates: {
+    canonical: siteConfig.url,
   },
 };
 
-export const viewport: Viewport = {
+export const viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f8fafb" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0e12" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b1224" },
   ],
-  width: "device-width",
-  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -84,35 +76,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-canvas text-text-primary">
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            name: siteConfig.name,
-            alternateName: siteConfig.shortName,
-            url: siteConfig.url,
-            description: siteConfig.description,
-            sameAs: [siteConfig.links.linkedin, siteConfig.links.twitter],
-          }}
-        />
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+    <html lang="en-IN" suppressHydrationWarning>
+      <head>
+        <OrganizationJsonLd />
+      </head>
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans`}>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <a
             href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[999] focus:rounded-md focus:bg-surface focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-navy-900 focus:px-4 focus:py-2 focus:text-white"
           >
-            Skip to main content
+            Skip to content
           </a>
           <SiteNav />
-          <main id="main-content" className="flex-1">
+          <main id="main-content" className="min-h-screen">
             {children}
           </main>
           <SiteFooter />
+          <StickyMobileCta />
+          <WhatsappFloat />
           <Toaster />
         </ThemeProvider>
       </body>

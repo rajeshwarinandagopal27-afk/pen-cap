@@ -4,51 +4,33 @@ import * as React from "react";
 import { motion, type Variants } from "framer-motion";
 
 const variants: Variants = {
-  hidden: { opacity: 0, y: 8 },
+  hidden: { opacity: 0, y: 24 },
   visible: { opacity: 1, y: 0 },
 };
 
-interface RevealProps {
-  children: React.ReactNode;
-  className?: string;
-  delay?: number;
-  as?: "div" | "li";
-}
-
-export function Reveal({ children, className, delay = 0, as = "div" }: RevealProps) {
-  const MotionComp = as === "li" ? motion.li : motion.div;
-  return (
-    <MotionComp
-      className={className}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      variants={variants}
-      transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1], delay }}
-    >
-      {children}
-    </MotionComp>
-  );
-}
-
-export function RevealGroup({
+export function Reveal({
   children,
+  delay = 0,
   className,
-  stagger = 0.06,
+  as = "div",
 }: {
   children: React.ReactNode;
+  delay?: number;
   className?: string;
-  stagger?: number;
+  as?: "div" | "li";
 }) {
+  const Comp = motion[as];
+
   return (
-    <motion.div
-      className={className}
+    <Comp
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ staggerChildren: stagger }}
+      viewport={{ once: true, margin: "-80px" }}
+      variants={variants}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay }}
+      className={className}
     >
       {children}
-    </motion.div>
+    </Comp>
   );
 }

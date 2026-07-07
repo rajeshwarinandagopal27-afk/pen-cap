@@ -1,30 +1,25 @@
-import type { CurriculumModule } from "@/lib/types";
+import { CheckCircle2Icon } from "lucide-react";
 
-export function CurriculumTimeline({ modules }: { modules: CurriculumModule[] }) {
+import type { Program } from "@/lib/types";
+import { Reveal } from "@/components/marketing/reveal";
+
+export function CurriculumTimeline({ modules }: { modules: Program["modules"] }) {
   return (
-    <ol className="flex flex-col gap-0">
+    <div className="relative space-y-6 border-l border-border pl-8">
       {modules.map((module, index) => (
-        <li key={module.title} className="relative flex gap-5 pb-10 last:pb-0">
-          <div className="flex flex-col items-center">
-            <span className="flex size-8 shrink-0 items-center justify-center rounded-full border border-accent/40 bg-accent-fill font-mono text-xs font-medium text-accent">
-              {index + 1}
-            </span>
-            {index < modules.length - 1 && <span className="mt-1 w-px flex-1 bg-border" aria-hidden="true" />}
-          </div>
-          <div className="pb-2">
-            <p className="font-mono text-xs font-medium uppercase tracking-wider text-text-muted">{module.weekRange}</p>
-            <h4 className="mt-1 font-display text-lg font-semibold text-text-primary">{module.title}</h4>
-            <p className="mt-1.5 max-w-2xl text-sm leading-relaxed text-text-secondary">{module.description}</p>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {module.skills.map((skill) => (
-                <span key={skill} className="rounded-[var(--radius-sm)] bg-surface-raised px-2.5 py-1 text-xs text-text-secondary">
-                  {skill}
-                </span>
-              ))}
-            </div>
-          </div>
-        </li>
+        <Reveal key={module.title} delay={index * 0.06} className="relative">
+          <span className="absolute -left-[calc(2rem+5px)] top-1 flex size-3 items-center justify-center rounded-full bg-royal-500 ring-4 ring-royal-500/15" />
+          <h3 className="text-base font-semibold text-foreground">{module.title}</h3>
+          <ul className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
+            {module.topics.map((topic) => (
+              <li key={topic} className="flex items-start gap-2 text-sm text-muted-foreground">
+                <CheckCircle2Icon className="mt-0.5 size-4 shrink-0 text-royal-500" />
+                {topic}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       ))}
-    </ol>
+    </div>
   );
 }

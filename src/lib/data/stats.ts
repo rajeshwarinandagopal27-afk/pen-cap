@@ -1,27 +1,66 @@
-export const siteStats = {
-  placementRate: { value: 89, suffix: "%", label: "Graduates placed within 180 days" },
-  medianTimeToPlacement: { value: 71, suffix: " days", label: "Median time to placement" },
-  avgSalaryLift: { value: 41, suffix: "%", label: "Average salary increase after placement" },
-  alumniCount: { value: 1240, suffix: "+", label: "Alumni working in security" },
-  mentorRatio: { value: 12, prefix: "1:", suffix: "", label: "Mentor-to-student ratio" },
-  facultyCves: { value: 38, suffix: "", label: "CVEs credited to PenCap faculty" },
-};
+export const heroStats = [
+  { value: 1000, suffix: "+", label: "Students Trained" },
+  { value: 92, suffix: "%", label: "Placement Rate" },
+  { value: 40, suffix: "+", label: "Hiring Partners" },
+  { value: 15, suffix: "", label: "Max Batch Size" },
+] as const;
 
-export const methodology = {
-  summary:
-    "Placement is defined as a full-time, contract, or apprenticeship security role accepted within 180 days of a student's graduation date, self-reported by the graduate and cross-checked against LinkedIn employment records where public.",
-  sampleSize: "Based on the 2024–2025 graduating cohorts (n = 612).",
-  excluded:
-    "Students who do not complete the program, or who accept a role outside of security within the tracking window, are excluded from the placement-rate numerator but remain in the denominator.",
-  auditNote:
-    "Outcomes are compiled internally and reviewed annually by Halvorsen & Cole, an independent accounting firm, for methodology consistency. The most recent review was completed in January 2026.",
-};
+export const trustBadges = [
+  {
+    title: "EC-Council",
+    subtitle: "Accredited Training Center",
+  },
+  {
+    title: "CompTIA",
+    subtitle: "Authorized Training Partner",
+  },
+  {
+    title: "Industry Experts",
+    subtitle: "Practitioner-led faculty",
+  },
+  {
+    title: "1000+ Students",
+    subtitle: "Trained since inception",
+  },
+  {
+    title: "Hands-on Labs",
+    subtitle: "Real-world SOC & attack ranges",
+  },
+  {
+    title: "Placement Support",
+    subtitle: "Dedicated career services team",
+  },
+] as const;
 
-export const employerLogos = [
-  "Solace Financial",
-  "Northgate Health Systems",
-  "Vantage Cloud Partners",
-  "Ferrous Advisory",
-  "Cobalt Ridge Technologies",
-  "Anchorpoint Bank",
-];
+export const whyPenCap = [
+  {
+    title: "Real-Time Labs",
+    description:
+      "Train inside a live SOC lab and attack-range environment built on enterprise-grade tools — not simulations on slides.",
+  },
+  {
+    title: "Industry Mentors",
+    description:
+      "Learn from practitioners who work in penetration testing and SOC teams during the day, and mentor at PenCap in the evening.",
+  },
+  {
+    title: "Small Batch Size",
+    description:
+      "Every batch is capped at 15 students so mentors can give individual attention to every learner, every session.",
+  },
+  {
+    title: "Career Guidance",
+    description:
+      "One-on-one career mapping from day one — we help you choose the right specialization for your background and goals.",
+  },
+  {
+    title: "Resume Building",
+    description:
+      "Our placement team rebuilds your resume around real projects and labs so it survives applicant tracking systems and recruiters alike.",
+  },
+  {
+    title: "Interview Preparation",
+    description:
+      "Structured mock interviews, technical whiteboard rounds, and HR simulations before you sit in front of a hiring panel.",
+  },
+] as const;

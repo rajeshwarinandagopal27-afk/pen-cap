@@ -1,20 +1,16 @@
+import { dirname } from "path";
+import { fileURLToPath } from "url";
+import { FlatCompat } from "@eslint/eslintrc";
 import { defineConfig, globalIgnores } from "eslint/config";
-import nextVitals from "eslint-config-next/core-web-vitals";
-import nextTs from "eslint-config-next/typescript";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
+const compat = new FlatCompat({
+  baseDirectory: __dirname,
+});
 
 const eslintConfig = defineConfig([
-  ...nextVitals,
-  ...nextTs,
-  {
-    rules: {
-      // This rule flags legitimate one-time synchronization of browser/DOM
-      // state into React state on mount (matchMedia queries, hydration-safe
-      // "mounted" flags, IntersectionObserver-driven animation triggers) —
-      // all deliberately used in this codebase for the motion system's
-      // reduced-motion and scroll-reveal behavior.
-      "react-hooks/set-state-in-effect": "off",
-    },
-  },
+  ...compat.extends("next/core-web-vitals", "next/typescript"),
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

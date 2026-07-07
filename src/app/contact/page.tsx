@@ -1,50 +1,117 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import { MailIcon, MapPinIcon, PhoneCallIcon, ClockIcon } from "lucide-react";
 
-import { SectionEyebrow } from "@/components/marketing/section-eyebrow";
-import { ContactForm } from "@/components/marketing/contact-form";
-import { getProgramBySlug } from "@/lib/data/programs";
 import { siteConfig } from "@/lib/site-config";
+import { SectionEyebrow } from "@/components/marketing/section-eyebrow";
+import { Reveal } from "@/components/marketing/reveal";
+import { ContactForm } from "@/components/marketing/contact-form";
+import { BreadcrumbJsonLd } from "@/components/json-ld";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Talk to a PenCap Institute admissions advisor or our enterprise training team.",
+  title: "Contact Us & Book a Campus Visit",
+  description:
+    "Book a free career consultation, apply to a program, or plan a visit to PenCap Institute's Chennai campus. We respond within 24 hours.",
   alternates: { canonical: "/contact" },
 };
 
-export default async function ContactPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ program?: string; intent?: string }>;
-}) {
-  const { program: programParam, intent } = await searchParams;
-  const program = programParam ? getProgramBySlug(programParam) : undefined;
+const contactDetails = [
+  {
+    icon: MapPinIcon,
+    label: "Campus Address",
+    value: `${siteConfig.contact.address.line1}, ${siteConfig.contact.address.line2}, ${siteConfig.contact.address.city}, ${siteConfig.contact.address.state} ${siteConfig.contact.address.pincode}`,
+  },
+  {
+    icon: PhoneCallIcon,
+    label: "Call Us",
+    value: siteConfig.contact.phone,
+    href: `tel:${siteConfig.contact.phoneRaw}`,
+  },
+  {
+    icon: MailIcon,
+    label: "Email Us",
+    value: siteConfig.contact.email,
+    href: `mailto:${siteConfig.contact.email}`,
+  },
+  {
+    icon: ClockIcon,
+    label: "Campus Hours",
+    value: `Weekdays ${siteConfig.hours.weekday} · Weekends ${siteConfig.hours.weekend}`,
+  },
+];
 
+export default function ContactPage() {
   return (
-    <div className="container-page py-16 sm:py-20">
-      <div className="mx-auto max-w-xl text-center">
-        <SectionEyebrow>Contact</SectionEyebrow>
-        <h1 className="mt-3 font-display text-4xl font-semibold tracking-tight text-text-primary sm:text-5xl">
-          Talk to a real person
-        </h1>
-        <p className="mt-4 text-lg leading-relaxed text-text-secondary">
-          Whether you&rsquo;re deciding between programs or exploring training for your team, tell
-          us a bit about what you need and we&rsquo;ll route it to the right person.
-        </p>
-        <p className="mt-2 text-sm text-text-secondary">
-          Prefer email? Reach us at{" "}
-          <a href={`mailto:${siteConfig.contactEmail}`} className="font-medium text-accent hover:underline">
-            {siteConfig.contactEmail}
-          </a>
-          .
-        </p>
-      </div>
+    <>
+      <BreadcrumbJsonLd items={[{ name: "Home", url: "/" }, { name: "Contact", url: "/contact" }]} />
 
-      <div className="mx-auto mt-12 max-w-xl rounded-[var(--radius-lg)] border border-border bg-surface p-6 sm:p-10">
-        <ContactForm
-          defaultIntent={intent === "enterprise" ? "enterprise" : "enroll"}
-          programHint={program?.name}
-        />
-      </div>
-    </div>
+      <section className="container-px mx-auto max-w-7xl py-16 lg:py-24">
+        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2">
+          <div>
+            <Reveal>
+              <SectionEyebrow>Contact</SectionEyebrow>
+            </Reveal>
+            <Reveal delay={0.05}>
+              <h1 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl">
+                Let&rsquo;s plan your next move
+              </h1>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="mt-4 max-w-md text-lg text-muted-foreground">
+                Book a free career consultation, apply to a program, or plan a visit to our Chennai
+                campus. Our admissions team responds within 24 hours.
+              </p>
+            </Reveal>
+
+            <div className="mt-10 space-y-5">
+              {contactDetails.map((item, index) => (
+                <Reveal key={item.label} delay={0.15 + index * 0.05}>
+                  <div className="flex items-start gap-4">
+                    <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-royal-500/10 text-royal-600 dark:text-royal-400">
+                      <item.icon className="size-5" />
+                    </span>
+                    <div>
+                      <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                      {item.href ? (
+                        <a href={item.href} className="text-sm text-muted-foreground hover:text-foreground">
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p className="text-sm text-muted-foreground">{item.value}</p>
+                      )}
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+
+            <Reveal delay={0.4} className="mt-10 overflow-hidden rounded-2xl border border-border">
+              <a href={siteConfig.contact.mapUrl} target="_blank" rel="noreferrer noopener">
+                <div className="flex h-56 items-center justify-center bg-gradient-to-br from-navy-900 to-navy-700 text-white">
+                  <span className="flex items-center gap-2 text-sm font-medium">
+                    <MapPinIcon className="size-4" />
+                    View campus location on Google Maps
+                  </span>
+                </div>
+              </a>
+            </Reveal>
+          </div>
+
+          <Reveal delay={0.1}>
+            <div className="rounded-3xl border border-border bg-card p-8">
+              <h2 className="text-xl font-semibold text-foreground">Send us a message</h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                Fill this in and an admissions counselor will call you back.
+              </p>
+              <div className="mt-6">
+                <Suspense fallback={null}>
+                  <ContactForm />
+                </Suspense>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+    </>
   );
 }

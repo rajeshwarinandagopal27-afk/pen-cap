@@ -13,19 +13,18 @@ export default function Icon() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "#0A0E12",
+          background: "#0b1224",
           borderRadius: 7,
         }}
       >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
           <path
-            d="M12 2L4 5.5V11c0 5.25 3.4 9.74 8 11 4.6-1.26 8-5.75 8-11V5.5L12 2z"
-            fill="#14A3AE"
+            d="M12 2L4 5V11C4 16.5 7.5 21.3 12 22.5C16.5 21.3 20 16.5 20 11V5L12 2Z"
+            fill="#3B62F6"
           />
-          <path d="M12 2L4 5.5V11c0 5.25 3.4 9.74 8 11V2z" fill="#3FC4CE" />
         </svg>
       </div>
     ),
-    size
+    { ...size }
   );
 }

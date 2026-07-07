@@ -1,62 +1,58 @@
 import type { FaqItem } from "@/lib/types";
 
-export const homeFaq: FaqItem[] = [
+export const faqItems: FaqItem[] = [
   {
-    question: "Do I need a computer science degree or prior IT experience?",
+    category: "Admissions",
+    question: "Do I need a technical background to join PenCap?",
     answer:
-      "No degree is required for any program. The SOC Analyst Accelerator and Offensive Security Program are both designed for career changers — about 60% of our students come from outside traditional IT roles. The Advanced Red Team Certificate does require existing security experience; see that program's page for specifics.",
+      "No. Our Master Program is designed to take you from zero technical background to job-ready. CEH v13 AI and SOC Analyst tracks are best suited for candidates with basic networking or IT familiarity, which our foundation bridge sessions cover before the core syllabus begins.",
   },
   {
-    question: "How much time does a program actually require each week?",
+    category: "Admissions",
+    question: "How do I book a free career consultation?",
     answer:
-      "Cohort programs run 15–20 hours per week: two live sessions with instructors, a mentor check-in, and self-directed lab time in the Cyber Range. Most students keep a full-time job during the first half of the program and reduce hours or take leave for the final capstone module.",
+      "Use the 'Book Free Career Consultation' button on any page to schedule a 30-minute call with our career advisors, or visit our Chennai campus directly for a walk-in consultation and a live tour of our labs.",
   },
   {
-    question: "What happens if I don't get placed after graduating?",
+    category: "Programs",
+    question: "What is the difference between CEH v13 AI, SOC Analyst and the Master Program?",
     answer:
-      "If you complete every module, attend every scheduled mentor session, and are not placed in a security role within 6 months of graduating, we refund 100% of your tuition. Full terms are on the Pricing page — we'd rather state this plainly than bury it in a contract.",
+      "CEH v13 AI focuses on offensive security — how attackers breach systems. SOC Analyst focuses on defensive security — how enterprises detect and respond to attacks in real time. The Master Program combines both tracks over 9 months with an added internship and guaranteed interview opportunities.",
   },
   {
-    question: "Can I try the material before applying?",
+    category: "Programs",
+    question: "Are classes conducted online or offline?",
     answer:
-      "Yes. The Cyber Range is open to anyone — no application, no signup required for your first challenge. It's built from the same lab environment students use during the program, so it's a genuine preview, not a marketing demo.",
+      "All programs are conducted at our Chennai campus with hands-on lab access, which is central to our teaching model. Select theory sessions are supplemented with recorded content for revision, but labs and assessments are campus-based.",
   },
   {
-    question: "What financing options are available?",
+    category: "Placements",
+    question: "What is PenCap's placement rate?",
     answer:
-      "Pay in full (with a discount), a 12-month 0% APR installment plan, an income share agreement that only begins once you're earning above $50,000, or employer sponsorship. All four are explained in plain terms on the Pricing & Financing page.",
+      "92% of eligible graduates from our last three cohorts received a job offer within 6 months of course completion, supported by our network of 40+ hiring partners across IT services, product companies and consulting firms.",
   },
   {
-    question: "How are your placement statistics calculated?",
+    category: "Placements",
+    question: "Is placement guaranteed?",
     answer:
-      "We publish our full methodology on the Outcomes page, including sample size, what counts as a placement, and what's excluded. Our numbers are reviewed annually by an independent accounting firm.",
+      "We guarantee interview opportunities with our hiring partners for every eligible graduate, along with unlimited mock interviews and resume support until you are placed. Final offers depend on your performance in the interview process.",
   },
   {
-    question: "How is this different from a certification course or self-study?",
+    category: "Certification",
+    question: "Is the CEH v13 AI exam voucher included in the course fee?",
     answer:
-      "Certifications test whether you know material; PenCap is built around whether you can perform under conditions that resemble a real engagement, with instructor and mentor feedback along the way. See the comparison table on the Pricing page for a direct breakdown.",
+      "Yes. The CEH v13 AI program fee includes your official EC-Council exam voucher, exam readiness bootcamp, and two mock certification exams.",
   },
   {
-    question: "Is there a live component, or is it all self-paced video?",
+    category: "Logistics",
+    question: "What batch timings are available?",
     answer:
-      "Cohort programs include two live instructor sessions per week plus a weekly 1:1 or small-group mentor session — recorded for anyone who misses one, but built around real-time interaction, not a video library. A self-paced option is available for select programs; program pages note which format applies.",
-  },
-];
-
-export const pricingFaq: FaqItem[] = [
-  {
-    question: "What does the tuition figure include?",
-    answer:
-      "Tuition includes all instructor-led sessions, mentor time, Cyber Range lab access for the duration of the program plus 12 months after graduation, and admissions support. There are no separate lab fees or hidden add-ons.",
+      "We run weekday batches (evenings) and weekend batches (full-day Saturday and Sunday) to accommodate working professionals and students. Batch size is capped at 15 students to ensure mentor attention.",
   },
   {
-    question: "How does the income share agreement work?",
+    category: "Logistics",
+    question: "Can I visit the campus before enrolling?",
     answer:
-      "You pay $0 upfront. Once you're placed in a security role earning at least $50,000/year, you pay 10% of your gross salary for 24 months, capped at 1.4x tuition. If you're never placed above that threshold, payments never begin — full terms are provided before you select this option in the funnel.",
-  },
-  {
-    question: "Is the refund guarantee retroactive if I've already started?",
-    answer:
-      "The 14-day no-questions refund applies from your enrollment date regardless of progress. The placement guarantee applies to any student who completes the program in full, attends all scheduled sessions, and is not placed within 6 months of graduation.",
+      "Absolutely — we encourage it. Campus visits let you see our live SOC lab, meet current mentors, and sit in on an ongoing session. Book a visit through the Contact page or call our admissions team directly.",
   },
 ];

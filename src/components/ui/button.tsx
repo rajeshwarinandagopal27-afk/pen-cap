@@ -1,76 +1,59 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Loader2 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius-md)] text-sm font-medium transition-[background-color,border-color,color,transform,box-shadow] duration-150 ease-[var(--ease-standard)] disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none [&_svg]:shrink-0 active:translate-y-0 cursor-pointer",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full text-sm font-medium transition-all duration-200 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg]:size-4 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
   {
     variants: {
       variant: {
-        primary:
-          "bg-primary text-primary-foreground hover:-translate-y-px hover:shadow-[0_4px_12px_rgba(16,21,26,0.12)] active:translate-y-0 active:opacity-90",
+        default:
+          "bg-navy-900 text-white shadow-sm hover:bg-navy-800 active:bg-navy-950 dark:bg-white dark:text-navy-950 dark:hover:bg-white/90",
+        accent:
+          "bg-royal-500 text-white shadow-md shadow-royal-500/25 hover:bg-royal-600 active:bg-royal-600",
+        destructive:
+          "bg-red-600 text-white shadow-sm hover:bg-red-600/90",
+        outline:
+          "border border-border bg-transparent hover:bg-secondary text-foreground",
         secondary:
-          "border border-border bg-transparent text-text-primary hover:bg-surface-raised hover:-translate-y-px active:translate-y-0",
-        ghost: "bg-transparent text-text-primary hover:bg-surface-raised",
-        link: "bg-transparent text-accent underline underline-offset-4 hover:no-underline p-0 h-auto",
-        destructive: "bg-destructive text-destructive-foreground hover:opacity-90",
+          "bg-secondary text-secondary-foreground hover:bg-secondary/70",
+        ghost: "hover:bg-secondary text-foreground",
+        link: "text-royal-500 underline-offset-4 hover:underline",
       },
       size: {
-        sm: "h-9 px-4 text-sm",
-        md: "h-11 px-5 text-sm",
-        lg: "h-13 px-7 text-base",
+        default: "h-11 px-6 py-2 has-[>svg]:px-5",
+        sm: "h-9 px-4 text-sm has-[>svg]:px-3.5",
+        lg: "h-13 px-8 text-base has-[>svg]:px-7",
+        icon: "size-10",
       },
     },
     defaultVariants: {
-      variant: "primary",
-      size: "md",
+      variant: "default",
+      size: "default",
     },
   }
 );
-
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  asChild?: boolean;
-  loading?: boolean;
-}
 
 function Button({
   className,
   variant,
   size,
   asChild = false,
-  loading = false,
-  disabled,
-  children,
   ...props
-}: ButtonProps) {
+}: React.ComponentProps<"button"> &
+  VariantProps<typeof buttonVariants> & {
+    asChild?: boolean;
+  }) {
   const Comp = asChild ? Slot : "button";
 
-  // Slot (Radix) requires exactly one element child, so the loading
-  // spinner can only be injected as a sibling when rendering a real
-  // <button> — asChild callers are expected to pass a single element
-  // (e.g. a Link) and are responsible for their own loading affordance.
   return (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
-      disabled={disabled || loading}
-      aria-busy={loading || undefined}
       {...props}
-    >
-      {asChild ? (
-        children
-      ) : (
-        <>
-          {loading && <Loader2 className="size-4 animate-spin" aria-hidden="true" />}
-          {children}
-        </>
-      )}
-    </Comp>
+    />
   );
 }
 

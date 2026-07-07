@@ -1,37 +1,39 @@
 import type { MetadataRoute } from "next";
 
+import { programs } from "@/lib/data/programs";
+import { blogPosts } from "@/lib/data/blogs";
 import { siteConfig } from "@/lib/site-config";
-import { getAllProgramSlugs } from "@/lib/data/programs";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticRoutes = [
     "",
-    "/programs",
-    "/admissions",
-    "/admissions/apply",
-    "/outcomes",
+    "/courses",
     "/about",
-    "/enterprise",
-    "/cyber-range",
-    "/pricing",
+    "/campus",
+    "/placements",
+    "/testimonials",
+    "/blogs",
     "/contact",
-    "/login",
-    "/legal/privacy",
-    "/legal/terms",
-    "/legal/refunds",
-  ].map((path) => ({
-    url: `${siteConfig.url}${path}`,
+  ].map((route) => ({
+    url: `${siteConfig.url}${route}`,
     lastModified: new Date(),
     changeFrequency: "weekly" as const,
-    priority: path === "" ? 1 : 0.7,
+    priority: route === "" ? 1 : 0.8,
   }));
 
-  const programRoutes = getAllProgramSlugs().map((slug) => ({
-    url: `${siteConfig.url}/programs/${slug}`,
+  const programRoutes = programs.map((program) => ({
+    url: `${siteConfig.url}/courses/${program.slug}`,
     lastModified: new Date(),
-    changeFrequency: "weekly" as const,
+    changeFrequency: "monthly" as const,
     priority: 0.9,
   }));
 
-  return [...staticRoutes, ...programRoutes];
+  const blogRoutes = blogPosts.map((post) => ({
+    url: `${siteConfig.url}/blogs/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticRoutes, ...programRoutes, ...blogRoutes];
 }
