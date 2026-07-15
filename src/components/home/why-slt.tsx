@@ -7,9 +7,9 @@ export function WhySlt() {
     <section className="border-y border-border bg-surface/40">
       <div className="container-page py-20 sm:py-28">
         <SectionHeading
-          eyebrow="Why SLT"
-          title="The trust layer between your design and its first power-on."
-          description="Procurement can't compromise on authenticity, lead time or accountability. Neither do we."
+          eyebrow="Why Procurement Teams Choose SLT"
+          title="Built around how procurement actually buys components."
+          description="An RFQ-based process, not a shopping cart — because a wrong or late component costs far more than a slow quote."
         />
 
         <div className="mt-12 grid gap-px overflow-hidden rounded-xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-3">

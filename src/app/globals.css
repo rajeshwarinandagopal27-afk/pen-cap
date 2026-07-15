@@ -52,7 +52,8 @@
   --color-text-secondary: var(--color-ink-600);
   --color-text-muted: var(--color-ink-500);
   --color-text-inverse: var(--color-ink-50);
-  --color-brand: var(--color-copper-600);
+  /* Deepened from copper-600 to clear 4.5:1 body-text contrast on light backgrounds (WCAG AA). */
+  --color-brand: #a05a2b;
   --color-brand-strong: var(--color-copper-700);
   --color-focus-ring: var(--color-copper-500);
 
@@ -95,6 +96,8 @@
   --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
 
   --animate-marquee: marquee 40s linear infinite;
+  --animate-accordion-down: accordion-down 0.25s var(--ease-emphasized);
+  --animate-accordion-up: accordion-up 0.2s var(--ease-standard);
 
   @keyframes marquee {
     from { transform: translateX(0); }

@@ -11,9 +11,9 @@ export function Industries() {
     <section className="container-page py-20 sm:py-28">
       <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
         <SectionHeading
-          eyebrow="Industries"
-          title="Domain expertise, from robotics to medical."
-          description="We speak your application. Sourcing decisions informed by how the part actually gets used."
+          eyebrow="Industries We Serve"
+          title="Sourcing decisions informed by how the part gets used."
+          description="From automation floors to defense programmes — component choices made in the context of the application."
         />
         <Reveal>
           <Button asChild variant="outline">
