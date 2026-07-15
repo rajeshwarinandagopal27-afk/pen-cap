@@ -1,29 +1,22 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
+
 import "./globals.css";
-import { ThemeProvider } from "@/components/theme-provider";
-import { SiteNav } from "@/components/nav/site-nav";
-import { SiteFooter } from "@/components/nav/site-footer";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { SiteHeader } from "@/components/layout/site-header";
+import { SiteFooter } from "@/components/layout/site-footer";
 import { Toaster } from "@/components/ui/sonner";
-import { JsonLd } from "@/components/json-ld";
-import { siteConfig } from "@/lib/site-config";
+import { siteConfig } from "@/lib/site";
 
 const inter = Inter({
+  subsets: ["latin"],
   variable: "--font-inter",
-  subsets: ["latin"],
   display: "swap",
-});
-
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["500", "600", "700"],
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
   subsets: ["latin"],
+  variable: "--font-jetbrains-mono",
   display: "swap",
 });
 
@@ -31,88 +24,55 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
     default: `${siteConfig.name} — ${siteConfig.tagline}`,
-    template: `%s — ${siteConfig.name}`,
+    template: `%s · ${siteConfig.name}`,
   },
   description: siteConfig.description,
+  applicationName: siteConfig.name,
   keywords: [
-    "cybersecurity training",
-    "penetration testing course",
-    "SOC analyst training",
-    "cloud security certificate",
-    "offensive security program",
-    "cybersecurity bootcamp",
+    "electronic components distributor",
+    "component sourcing India",
+    "RFQ electronic components",
+    "semiconductors distributor",
+    "BOM sourcing",
+    "OEM electronics supplier",
   ],
   authors: [{ name: siteConfig.name }],
-  creator: siteConfig.name,
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: siteConfig.locale,
     url: siteConfig.url,
+    siteName: siteConfig.name,
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
-    siteName: siteConfig.name,
   },
   twitter: {
     card: "summary_large_image",
     title: `${siteConfig.name} — ${siteConfig.tagline}`,
     description: siteConfig.description,
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f8fafb" },
-    { media: "(prefers-color-scheme: dark)", color: "#0a0e12" },
+    { media: "(prefers-color-scheme: light)", color: "#f5f6f8" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0e14" },
   ],
-  width: "device-width",
-  initialScale: 1,
+  colorScheme: "dark light",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-canvas text-text-primary">
-        <JsonLd
-          data={{
-            "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            name: siteConfig.name,
-            alternateName: siteConfig.shortName,
-            url: siteConfig.url,
-            description: siteConfig.description,
-            sameAs: [siteConfig.links.linkedin, siteConfig.links.twitter],
-          }}
-        />
+    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="min-h-dvh antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[999] focus:rounded-md focus:bg-surface focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg"
-          >
-            Skip to main content
-          </a>
-          <SiteNav />
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <SiteFooter />
+          <div className="flex min-h-dvh flex-col">
+            <SiteHeader />
+            <main id="main" className="flex-1">
+              {children}
+            </main>
+            <SiteFooter />
+          </div>
           <Toaster />
         </ThemeProvider>
       </body>

@@ -3,24 +3,21 @@
 import { useTheme } from "next-themes";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
 
-const Toaster = ({ ...props }: ToasterProps) => {
+export function Toaster(props: ToasterProps) {
   const { resolvedTheme } = useTheme();
-
   return (
     <Sonner
       theme={(resolvedTheme as ToasterProps["theme"]) ?? "system"}
       className="toaster group"
       position="bottom-right"
-      style={
-        {
-          "--normal-bg": "var(--color-surface-raised)",
-          "--normal-text": "var(--color-text-primary)",
-          "--normal-border": "var(--color-border)",
-        } as React.CSSProperties
-      }
+      toastOptions={{
+        classNames: {
+          toast:
+            "group toast group-[.toaster]:bg-surface group-[.toaster]:text-text-primary group-[.toaster]:border-border group-[.toaster]:shadow-lg",
+          description: "group-[.toast]:text-text-muted",
+        },
+      }}
       {...props}
     />
   );
-};
-
-export { Toaster };
+}

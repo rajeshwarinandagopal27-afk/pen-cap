@@ -4,68 +4,59 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /* ---------------------------------------------------------------------
- * PenCap Institute design tokens
- * See /docs/design/02-design-tokens.md and /docs/design/04-color-system.md
- * for the full rationale behind every value below.
+ * SLT Technology — design tokens
+ * Brand system: Silicon Ink + Tungsten Steel neutrals, Copper accent.
+ * Light + dark themed at the token level; components read semantic tokens.
  * ------------------------------------------------------------------- */
 @theme {
-  --font-display: var(--font-space-grotesk), "General Sans", "Neue Montreal", -apple-system, sans-serif;
-  --font-sans: var(--font-inter), -apple-system, "Segoe UI", sans-serif;
-  --font-mono: var(--font-jetbrains-mono), "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: var(--font-inter), -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-inter), -apple-system, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 
-  --breakpoint-xs: 30rem; /* 480px */
+  --breakpoint-xs: 30rem;
 
-  /* Ink neutral primitives (cool-tinted) */
-  --color-ink-950: #0a0e12;
-  --color-ink-900: #10151a;
-  --color-ink-800: #181f26;
-  --color-ink-700: #242c34;
-  --color-ink-600: #3b454e;
-  --color-ink-500: #5c6870;
-  --color-ink-400: #8a97a0;
-  --color-ink-300: #b7c1c8;
-  --color-ink-200: #dce3e7;
-  --color-ink-100: #eef2f4;
-  --color-ink-50: #f8fafb;
+  /* Neutral primitives — cool graphite / steel */
+  --color-ink-950: #0b0e14;
+  --color-ink-900: #0f131b;
+  --color-ink-800: #161b24;
+  --color-ink-700: #1f2630;
+  --color-ink-600: #2e3742;
+  --color-ink-500: #5b6675;
+  --color-ink-400: #8592a3;
+  --color-ink-300: #a8b2bf;
+  --color-ink-200: #cdd4dc;
+  --color-ink-100: #e7ebef;
+  --color-ink-50: #f5f6f8;
   --color-ink-0: #ffffff;
 
-  /* Signal accent (teal/cyan) */
-  --color-signal-700: #0a5e66;
-  --color-signal-600: #0e7c86;
-  --color-signal-500: #14a3ae;
-  --color-signal-400: #3fc4ce;
-  --color-signal-300: #7ddde3;
+  /* Copper accent scale */
+  --color-copper-700: #8a5a30;
+  --color-copper-600: #b26a31;
+  --color-copper-500: #c4783f;
+  --color-copper-400: #e0975b;
+  --color-copper-300: #ecb381;
 
-  /* Ember accent (scarcity/urgency only) */
-  --color-ember-600: #b54e0c;
-  --color-ember-500: #e07a1e;
-  --color-ember-400: #f3a24f;
+  /* Semantic status */
+  --color-success: #2aa876;
+  --color-warning: #d9b440;
+  --color-danger: #e5484d;
 
-  /* Semantic risk scale */
-  --color-risk-critical: #e5484d;
-  --color-risk-high: #e07a1e;
-  --color-risk-medium: #d9b440;
-  --color-risk-low: #14a3ae;
-  --color-risk-success: #2aa876;
-
-  /* Semantic tokens — light mode defaults, overridden under .dark below */
+  /* Semantic tokens — light defaults (overridden under .dark) */
   --color-canvas: var(--color-ink-50);
   --color-surface: var(--color-ink-0);
   --color-surface-raised: var(--color-ink-0);
+  --color-surface-sunken: var(--color-ink-100);
   --color-border: var(--color-ink-200);
   --color-border-muted: var(--color-ink-100);
   --color-text-primary: var(--color-ink-950);
   --color-text-secondary: var(--color-ink-600);
   --color-text-muted: var(--color-ink-500);
   --color-text-inverse: var(--color-ink-50);
-  --color-accent: var(--color-signal-600);
-  --color-accent-fill: color-mix(in srgb, var(--color-signal-500) 12%, transparent);
-  --color-urgency: var(--color-ember-600);
-  --color-urgency-fill: color-mix(in srgb, var(--color-ember-500) 12%, transparent);
-  --color-focus-ring: var(--color-signal-500);
+  --color-brand: var(--color-copper-600);
+  --color-brand-strong: var(--color-copper-700);
+  --color-focus-ring: var(--color-copper-500);
 
-  /* shadcn/ui compatibility aliases — mapped onto the semantic tokens above
-     so component primitives can use conventional shadcn class names. */
+  /* shadcn/ui aliases → mapped onto semantic tokens */
   --color-background: var(--color-canvas);
   --color-foreground: var(--color-text-primary);
   --color-card: var(--color-surface);
@@ -74,64 +65,48 @@
   --color-popover-foreground: var(--color-text-primary);
   --color-primary: var(--color-text-primary);
   --color-primary-foreground: var(--color-canvas);
-  --color-secondary: var(--color-surface-raised);
+  --color-secondary: var(--color-surface-sunken);
   --color-secondary-foreground: var(--color-text-primary);
   --color-muted: var(--color-border-muted);
   --color-muted-foreground: var(--color-text-muted);
+  --color-accent: var(--color-surface-sunken);
+  --color-accent-foreground: var(--color-text-primary);
   --color-input: var(--color-border);
   --color-ring: var(--color-focus-ring);
-  --color-destructive: var(--color-risk-critical);
+  --color-destructive: var(--color-danger);
   --color-destructive-foreground: var(--color-ink-0);
 
   /* Radius */
-  --radius-sm: 0.375rem; /* 6px */
-  --radius-md: 0.625rem; /* 10px */
-  --radius-lg: 0.875rem; /* 14px */
-  --radius-xl: 1.25rem; /* 20px */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.75rem;
 
   /* Z-index scale */
-  --z-index-base: 0;
-  --z-index-raised: 10;
-  --z-index-sticky-nav: 100;
-  --z-index-sticky-cta: 110;
-  --z-index-dropdown: 200;
-  --z-index-tooltip: 250;
-  --z-index-overlay: 300;
-  --z-index-modal: 310;
-  --z-index-toast: 400;
+  --z-sticky-nav: 100;
+  --z-dropdown: 200;
+  --z-overlay: 300;
+  --z-modal: 310;
+  --z-toast: 400;
 
   /* Motion */
   --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in: cubic-bezier(0.4, 0, 1, 1);
 
-  --animate-marquee: marquee 32s linear infinite;
+  --animate-marquee: marquee 40s linear infinite;
 
   @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-50%);
-    }
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
-
   @keyframes accordion-down {
-    from {
-      height: 0;
-    }
-    to {
-      height: var(--radix-accordion-content-height);
-    }
+    from { height: 0; }
+    to { height: var(--radix-accordion-content-height); }
   }
-
   @keyframes accordion-up {
-    from {
-      height: var(--radix-accordion-content-height);
-    }
-    to {
-      height: 0;
-    }
+    from { height: var(--radix-accordion-content-height); }
+    to { height: 0; }
   }
 }
 
@@ -139,38 +114,42 @@
   --color-canvas: var(--color-ink-950);
   --color-surface: var(--color-ink-900);
   --color-surface-raised: var(--color-ink-800);
+  --color-surface-sunken: var(--color-ink-800);
   --color-border: var(--color-ink-700);
   --color-border-muted: var(--color-ink-800);
   --color-text-primary: var(--color-ink-50);
   --color-text-secondary: var(--color-ink-300);
   --color-text-muted: var(--color-ink-400);
   --color-text-inverse: var(--color-ink-950);
-  --color-accent: var(--color-signal-400);
-  --color-urgency: var(--color-ember-400);
-  --color-focus-ring: var(--color-signal-400);
+  --color-brand: var(--color-copper-400);
+  --color-brand-strong: var(--color-copper-500);
+  --color-focus-ring: var(--color-copper-400);
 }
 
 @layer base {
   * {
     border-color: var(--color-border);
   }
-
   html {
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
   }
-
   body {
     background-color: var(--color-canvas);
     color: var(--color-text-primary);
     font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
-
   :focus-visible {
     outline: 2px solid var(--color-focus-ring);
     outline-offset: 2px;
     border-radius: 2px;
   }
-
+  ::selection {
+    background: color-mix(in srgb, var(--color-brand) 30%, transparent);
+  }
   @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
@@ -190,26 +169,39 @@
     margin-inline: auto;
     padding-inline: 1.5rem;
   }
-
   @variant sm {
-    .container-page {
-      padding-inline: 2rem;
-    }
+    .container-page { padding-inline: 2rem; }
   }
-
   @variant lg {
-    .container-page {
-      padding-inline: 4rem;
-    }
+    .container-page { padding-inline: 4rem; }
   }
-
   .container-reading {
     width: 100%;
-    max-width: 45rem;
+    max-width: 46rem;
     margin-inline: auto;
   }
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
 
-  .text-balance {
-    text-wrap: balance;
+  /* Technical grid backdrop */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--color-border-muted) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--color-border-muted) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .mask-fade-b {
+    -webkit-mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+  }
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
+  .text-brand-gradient {
+    background: linear-gradient(120deg, var(--color-copper-400), var(--color-copper-600));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 }

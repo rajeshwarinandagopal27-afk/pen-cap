@@ -1,77 +1,47 @@
 import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Loader2 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius-md)] text-sm font-medium transition-[background-color,border-color,color,transform,box-shadow] duration-150 ease-[var(--ease-standard)] disabled:pointer-events-none disabled:opacity-40 [&_svg]:pointer-events-none [&_svg]:shrink-0 active:translate-y-0 cursor-pointer",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-50 [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
-        primary:
-          "bg-primary text-primary-foreground hover:-translate-y-px hover:shadow-[0_4px_12px_rgba(16,21,26,0.12)] active:translate-y-0 active:opacity-90",
-        secondary:
-          "border border-border bg-transparent text-text-primary hover:bg-surface-raised hover:-translate-y-px active:translate-y-0",
-        ghost: "bg-transparent text-text-primary hover:bg-surface-raised",
-        link: "bg-transparent text-accent underline underline-offset-4 hover:no-underline p-0 h-auto",
-        destructive: "bg-destructive text-destructive-foreground hover:opacity-90",
+        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        brand: "bg-brand text-white hover:bg-brand-strong shadow-sm",
+        outline: "border border-border bg-transparent hover:bg-accent hover:text-accent-foreground",
+        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+        ghost: "hover:bg-accent hover:text-accent-foreground",
+        link: "text-brand underline-offset-4 hover:underline",
       },
       size: {
-        sm: "h-9 px-4 text-sm",
-        md: "h-11 px-5 text-sm",
-        lg: "h-13 px-7 text-base",
+        sm: "h-9 px-3.5 text-[13px]",
+        default: "h-11 px-5",
+        lg: "h-12 px-7 text-[15px]",
+        icon: "h-10 w-10",
       },
     },
     defaultVariants: {
-      variant: "primary",
-      size: "md",
+      variant: "default",
+      size: "default",
     },
-  }
+  },
 );
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
-  loading?: boolean;
 }
 
-function Button({
-  className,
-  variant,
-  size,
-  asChild = false,
-  loading = false,
-  disabled,
-  children,
-  ...props
-}: ButtonProps) {
-  const Comp = asChild ? Slot : "button";
-
-  // Slot (Radix) requires exactly one element child, so the loading
-  // spinner can only be injected as a sibling when rendering a real
-  // <button> — asChild callers are expected to pass a single element
-  // (e.g. a Link) and are responsible for their own loading affordance.
-  return (
-    <Comp
-      data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
-      disabled={disabled || loading}
-      aria-busy={loading || undefined}
-      {...props}
-    >
-      {asChild ? (
-        children
-      ) : (
-        <>
-          {loading && <Loader2 className="size-4 animate-spin" aria-hidden="true" />}
-          {children}
-        </>
-      )}
-    </Comp>
-  );
-}
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant, size, asChild = false, ...props }, ref) => {
+    const Comp = asChild ? Slot : "button";
+    return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+  },
+);
+Button.displayName = "Button";
 
 export { Button, buttonVariants };
