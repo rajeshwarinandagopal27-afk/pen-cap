@@ -16,6 +16,7 @@ export default function ManufacturersPage() {
     <>
       <PageHero
         eyebrow="Manufacturers"
+        motif="chipgrid"
         title="Globally recognized manufacturers, sourced responsibly."
         description="We source components from globally recognized manufacturers across the electronics supply chain. Brand names below identify the product lines we source — they do not imply authorization, partnership or affiliation."
       />

@@ -30,6 +30,7 @@ export default function ProductsPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <PageHero
         eyebrow="Product Categories"
+        motif="chipgrid"
         title="Thirteen categories. No catalogue, no cart."
         description="Each category below is a sourcing capability, not a parts list. Expand a category for applications, industries served, and how to get a quote."
       />

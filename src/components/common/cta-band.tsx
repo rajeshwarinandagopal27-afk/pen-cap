@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/common/reveal";
+import { Magnetic } from "@/components/motion/magnetic";
 import { cn } from "@/lib/utils";
 
 export function CtaBand({
@@ -30,12 +31,14 @@ export function CtaBand({
           </h2>
           <p className="mt-2 text-text-secondary">{description}</p>
         </Reveal>
-        <Reveal delay={0.08} className="flex flex-wrap gap-3">
-          <Button asChild variant="brand" size="lg">
-            <Link href="/request-rfq">
-              Request an RFQ <ArrowRight className="size-4" />
-            </Link>
-          </Button>
+        <Reveal delay={0.08} className="flex flex-wrap items-center gap-3">
+          <Magnetic>
+            <Button asChild variant="brand" size="lg">
+              <Link href="/request-rfq">
+                Request an RFQ <ArrowRight className="size-4" />
+              </Link>
+            </Button>
+          </Magnetic>
           <Button asChild variant="outline" size="lg">
             <Link href="/request-rfq#bom-upload">Upload BOM</Link>
           </Button>

@@ -20,6 +20,7 @@ export default function IndustriesPage() {
     <>
       <PageHero
         eyebrow="Industries"
+        motif="constellation"
         title="Component sourcing shaped by the application."
         description="A relay for a robotics arm and a relay for a defense programme carry different requirements. We source with that context in mind."
       />

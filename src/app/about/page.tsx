@@ -39,6 +39,7 @@ export default function AboutPage() {
     <>
       <PageHero
         eyebrow="About SLT Technology"
+        motif="orbits"
         title="A sourcing partner built for procurement, not retail."
         description="SLT Technology exists to remove one specific kind of risk from hardware development: the gap between a finished design and a genuine, on-time component supply."
       />

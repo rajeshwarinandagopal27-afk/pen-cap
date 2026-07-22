@@ -16,6 +16,7 @@ export default function QualityPage() {
     <>
       <PageHero
         eyebrow="Quality"
+        motif="scan"
         title="Quality is a checkpoint in the order, not an afterthought."
         description="Seven standards apply to every shipment, from a single sample to a production release — checked before a component leaves our custody, not after a failure is reported."
       />

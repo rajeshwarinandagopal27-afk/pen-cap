@@ -56,6 +56,7 @@ export default function GlobalSourcingPage() {
     <>
       <PageHero
         eyebrow="Global Sourcing"
+        motif="orbits"
         title="Sourcing that starts where a catalogue ends."
         description="Some components are a click away. The ones that matter most rarely are. This is the network and process built for those."
       />

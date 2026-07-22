@@ -19,6 +19,7 @@ export default function ContactPage() {
     <>
       <PageHero
         eyebrow="Contact"
+        motif="waveform"
         title="Talk to the procurement team."
         description="For a formal quote, use Request RFQ. For everything else — a question, a consultation, an ongoing sourcing relationship — reach us here."
       />

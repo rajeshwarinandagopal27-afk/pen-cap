@@ -18,6 +18,7 @@ export default function RequestRfqPage() {
     <>
       <PageHero
         eyebrow="Request RFQ"
+        motif="waveform"
         title="Tell us what you need sourced."
         description="A single part number or a complete bill of materials — every RFQ is reviewed by a sourcing engineer before it's quoted."
       />

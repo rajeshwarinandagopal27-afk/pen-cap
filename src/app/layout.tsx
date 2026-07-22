@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/layout/site-footer";
 import { Toaster } from "@/components/ui/sonner";
 import { SmoothScroll } from "@/components/motion/smooth-scroll";
 import { Cursor } from "@/components/motion/cursor";
+import { NavProgress } from "@/components/motion/nav-progress";
 import { siteConfig } from "@/lib/site";
 
 const inter = Inter({
@@ -70,6 +71,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     >
       <body className="min-h-dvh antialiased">
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark" disableTransitionOnChange>
+          <NavProgress />
           <SmoothScroll>
             <div className="flex min-h-dvh flex-col">
               <SiteHeader />

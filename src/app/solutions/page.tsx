@@ -20,6 +20,7 @@ export default function SolutionsPage() {
     <>
       <PageHero
         eyebrow="Solutions"
+        motif="traces"
         title="Sourcing services built around the RFQ."
         description="Eight capabilities that cover a component's path from spec sheet to your production line — engaged individually or as one ongoing sourcing relationship."
       />
