@@ -6,6 +6,8 @@ import { ThemeProvider } from "@/components/theme/theme-provider";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { Toaster } from "@/components/ui/sonner";
+import { SmoothScroll } from "@/components/motion/smooth-scroll";
+import { Cursor } from "@/components/motion/cursor";
 import { siteConfig } from "@/lib/site";
 
 const inter = Inter({
@@ -32,9 +34,10 @@ export const metadata: Metadata = {
     "electronic components distributor",
     "component sourcing India",
     "RFQ electronic components",
-    "semiconductors distributor",
-    "BOM sourcing",
+    "semiconductor sourcing",
+    "BOM fulfilment",
     "OEM electronics supplier",
+    "obsolete component sourcing",
   ],
   authors: [{ name: siteConfig.name }],
   openGraph: {
@@ -54,25 +57,29 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f5f6f8" },
-    { media: "(prefers-color-scheme: dark)", color: "#0b0e14" },
-  ],
-  colorScheme: "dark light",
+  themeColor: "#05070a",
+  colorScheme: "dark",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`dark ${inter.variable} ${jetbrainsMono.variable}`}
+    >
       <body className="min-h-dvh antialiased">
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <div className="flex min-h-dvh flex-col">
-            <SiteHeader />
-            <main id="main" className="flex-1">
-              {children}
-            </main>
-            <SiteFooter />
-          </div>
+        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark" disableTransitionOnChange>
+          <SmoothScroll>
+            <div className="flex min-h-dvh flex-col">
+              <SiteHeader />
+              <main id="main" className="flex-1">
+                {children}
+              </main>
+              <SiteFooter />
+            </div>
+          </SmoothScroll>
+          <Cursor />
           <Toaster />
         </ThemeProvider>
       </body>

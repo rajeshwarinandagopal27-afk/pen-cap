@@ -14,12 +14,12 @@ export function PageHero({
   className?: string;
 }) {
   return (
-    <section className={cn("relative isolate overflow-hidden border-b border-border", className)}>
+    <section className={cn("relative isolate overflow-hidden border-b border-border bg-noise", className)}>
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-grid mask-fade-b opacity-[0.5]" />
-        <div className="absolute right-[-15%] top-[-20%] h-[420px] w-[420px] rounded-full bg-brand/10 blur-[110px]" />
+        <div className="absolute inset-0 bg-grid mask-fade-b opacity-[0.4]" />
+        <div className="ambient right-[-10%] top-[-30%] h-[460px] w-[460px] opacity-40" />
       </div>
-      <div className="container-page py-16 sm:py-20 lg:py-24">
+      <div className="container-page pb-16 pt-28 sm:pb-20 sm:pt-32 lg:pb-24">
         <Reveal className="flex max-w-3xl flex-col gap-5">
           <Eyebrow>{eyebrow}</Eyebrow>
           <h1 className="text-balance font-display text-4xl font-extrabold leading-[1.08] tracking-tight text-text-primary sm:text-5xl">

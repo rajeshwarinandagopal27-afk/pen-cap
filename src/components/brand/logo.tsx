@@ -24,11 +24,11 @@ export function NodeMark({ className }: { className?: string }) {
         y1="50"
         x2="112"
         y2="50"
-        className="stroke-copper-500 dark:stroke-copper-400"
+        className="stroke-accent-500"
         strokeWidth={6}
         strokeLinecap="round"
       />
-      <circle cx="80" cy="50" r="10" className="fill-copper-500 dark:fill-copper-400" />
+      <circle cx="80" cy="50" r="10" className="fill-accent-500" />
     </svg>
   );
 }

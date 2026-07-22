@@ -1,13 +1,10 @@
-import { Hero } from "@/components/home/hero";
+import { CinematicHero } from "@/components/home/cinematic-hero";
 import { WhoWeAre } from "@/components/home/who-we-are";
-import { WhySlt } from "@/components/home/why-slt";
-import { ProductCategories } from "@/components/home/product-categories";
-import { Industries } from "@/components/home/industries";
-import { GlobalSourcingTeaser } from "@/components/home/global-sourcing-teaser";
-import { SupplyChainTeaser } from "@/components/home/supply-chain-teaser";
-import { QualityTeaser } from "@/components/home/quality-teaser";
-import { WorkflowSection } from "@/components/home/workflow-section";
-import { ManufacturerMarquee } from "@/components/home/manufacturer-marquee";
+import { ProductBlocks } from "@/components/home/product-blocks";
+import { GlobalSourcing } from "@/components/home/global-sourcing";
+import { WorkflowTimeline } from "@/components/home/workflow-timeline";
+import { WhyChoose } from "@/components/home/why-choose";
+import { ManufacturerWall } from "@/components/home/manufacturer-wall";
 import { CtaBand } from "@/components/common/cta-band";
 import { siteConfig } from "@/lib/site";
 import { pageMetadata } from "@/lib/seo";
@@ -40,16 +37,13 @@ export default function HomePage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <Hero />
+      <CinematicHero />
       <WhoWeAre />
-      <WhySlt />
-      <ProductCategories />
-      <Industries />
-      <GlobalSourcingTeaser />
-      <SupplyChainTeaser />
-      <QualityTeaser />
-      <WorkflowSection />
-      <ManufacturerMarquee />
+      <ProductBlocks />
+      <GlobalSourcing />
+      <WorkflowTimeline />
+      <WhyChoose />
+      <ManufacturerWall />
       <CtaBand />
     </>
   );

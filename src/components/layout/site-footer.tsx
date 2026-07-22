@@ -2,15 +2,23 @@ import Link from "next/link";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 import { Logo } from "@/components/brand/logo";
+import { ParticleField } from "@/components/motion/particle-field";
 import { footerNav, siteConfig } from "@/lib/site";
 
 export function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-border bg-surface">
+    <footer className="relative isolate overflow-hidden border-t border-border bg-surface bg-noise">
+      {/* animated ambient background */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-grid mask-fade-b opacity-20" />
+        <div className="ambient left-1/2 top-[-30%] h-[360px] w-[680px] -translate-x-1/2 opacity-25" />
+        <ParticleField count={36} className="absolute inset-0 h-full w-full opacity-60" />
+      </div>
+
       {/* Link columns */}
-      <div className="container-page grid gap-10 py-14 md:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
+      <div className="container-page relative grid gap-10 py-16 md:grid-cols-[1.5fr_1fr_1fr_1.2fr]">
         <div className="flex flex-col gap-4">
           <Logo withDescriptor />
           <p className="max-w-xs text-sm leading-relaxed text-text-secondary">

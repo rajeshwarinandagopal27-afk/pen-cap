@@ -3,32 +3,44 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, useReducedMotion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/brand/logo";
-import { ThemeToggle } from "@/components/theme/theme-toggle";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { Magnetic } from "@/components/motion/magnetic";
 import { mainNav } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const reduce = useReducedMotion();
+  const [hidden, setHidden] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
 
   React.useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 8);
+      // Reveal on scroll up, hide on scroll down (past the hero region).
+      if (y > last && y > 240) setHidden(true);
+      else if (y < last) setHidden(false);
+      last = y;
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <header
+    <motion.header
+      initial={false}
+      animate={{ y: hidden && !reduce ? "-100%" : "0%" }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        "sticky top-0 z-[100] w-full transition-colors duration-300",
-        scrolled
-          ? "border-b border-border bg-canvas/80 backdrop-blur-md supports-[backdrop-filter]:bg-canvas/70"
-          : "border-b border-transparent bg-transparent",
+        "fixed inset-x-0 top-0 z-[100] w-full transition-colors duration-300",
+        scrolled ? "glass border-b border-border" : "border-b border-transparent",
       )}
     >
       <a
@@ -42,7 +54,7 @@ export function SiteHeader() {
           <Logo />
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Primary">
           {mainNav.map((item) => {
             const active = pathname === item.href;
             return (
@@ -62,13 +74,14 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <Button asChild variant="brand" size="sm" className="hidden sm:inline-flex">
-            <Link href="/request-rfq">Request RFQ</Link>
-          </Button>
+          <Magnetic className="hidden sm:inline-flex">
+            <Button asChild variant="brand" size="sm">
+              <Link href="/request-rfq">Request RFQ</Link>
+            </Button>
+          </Magnetic>
           <MobileNav />
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }
