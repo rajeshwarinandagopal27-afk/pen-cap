@@ -4,6 +4,7 @@ import { ArrowRight, ShieldCheck, Globe2, Wrench } from "lucide-react";
 import { Eyebrow } from "@/components/common/eyebrow";
 import { Reveal } from "@/components/common/reveal";
 import { Button } from "@/components/ui/button";
+import { PcbGlow } from "@/components/motion/pcb-glow";
 import { aboutContent } from "@/lib/content";
 
 const pillars = [
@@ -16,7 +17,7 @@ export function WhoWeAre() {
   return (
     <section className="relative overflow-hidden bg-noise">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-grid mask-fade-b opacity-20" />
+        <PcbGlow className="opacity-70 [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)]" />
       </div>
       <div className="container-page py-24 sm:py-32">
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">

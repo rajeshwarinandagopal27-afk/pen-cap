@@ -62,7 +62,7 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative rounded-md px-3 py-2 text-sm font-medium transition-colors",
+                  "relative rounded-md px-3 py-2 text-sm font-medium transition-colors after:absolute after:inset-x-3 after:-bottom-px after:h-px after:origin-left after:scale-x-0 after:bg-brand/70 after:transition-transform after:duration-300 hover:after:scale-x-100",
                   active ? "text-text-primary" : "text-text-secondary hover:text-text-primary",
                 )}
               >

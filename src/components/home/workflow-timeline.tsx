@@ -15,6 +15,7 @@ export function WorkflowTimeline() {
     offset: ["start 65%", "end 60%"],
   });
   const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const headTop = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
     <section className="container-page py-24 sm:py-32">
@@ -33,6 +34,14 @@ export function WorkflowTimeline() {
           className="absolute left-[27px] top-2 bottom-2 w-px origin-top bg-gradient-to-b from-accent-400 to-accent-600 sm:left-[31px]"
           style={reduce ? { scaleY: 1 } : { scaleY }}
         />
+        {/* energy head riding the fill */}
+        {!reduce && (
+          <motion.div
+            aria-hidden="true"
+            className="absolute left-[27px] top-2 z-10 h-2 w-2 -translate-x-1/2 rounded-full bg-white shadow-[0_0_12px_4px_color-mix(in_srgb,var(--color-accent-400)_80%,transparent)] sm:left-[31px]"
+            style={{ top: headTop }}
+          />
+        )}
 
         <ol className="flex flex-col gap-10 sm:gap-12">
           {workflowSteps.map((step, i) => {

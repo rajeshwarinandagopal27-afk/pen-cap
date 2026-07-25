@@ -3,6 +3,7 @@ import { WhoWeAre } from "@/components/home/who-we-are";
 import { ProductBlocks } from "@/components/home/product-blocks";
 import { GlobalSourcing } from "@/components/home/global-sourcing";
 import { WorkflowTimeline } from "@/components/home/workflow-timeline";
+import { QualitySection } from "@/components/home/quality-section";
 import { WhyChoose } from "@/components/home/why-choose";
 import { ManufacturerWall } from "@/components/home/manufacturer-wall";
 import { CtaBand } from "@/components/common/cta-band";
@@ -42,6 +43,7 @@ export default function HomePage() {
       <ProductBlocks />
       <GlobalSourcing />
       <WorkflowTimeline />
+      <QualitySection />
       <WhyChoose />
       <ManufacturerWall />
       <CtaBand />
